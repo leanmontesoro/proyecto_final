@@ -15,12 +15,12 @@ def register(request):
             username=form.cleaned_data.get("username")
             clave=form.cleaned_data.get("password1")
             form.save()
-            #aca se podria loguear el usuario, con authenticate y login... pero no lo hago
+            
             usuario=authenticate(username=username, password=clave)#trae un usuario de la base, que tenga ese usuario y ese pass, si existe, lo trae y si no None
             login(request, usuario)
-            return render(request, "padre.html", {"mensaje":f"Bienvenido {username} !"})
+            return render(request, "index.html", {"mensaje":f"Bienvenido {username} !"})
         else:
-            return render(request, "signUp.html", {"form":form, "mensaje":"Error al crear el usuario"}) ##pincha
+            return render(request, "signUp.html", {"form":form, "mensaje":"Error al crear el usuario"}) 
      
     else:
         form=RegistroUsuarioForm()

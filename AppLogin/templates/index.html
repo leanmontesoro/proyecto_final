@@ -47,7 +47,16 @@
 			<li class="nav-item">
 				<a class="nav-link" href="{% url 'register' %} ">SignUP</a>
 				</li>
-				
+			{% if user.is_authenticated %}				
+			<li class="nav-item">
+				<a class="nav-link" href="{% url 'logout' %} ">Logout</a>
+				<p>Bienvenido {{ user.username }}</p>
+				</li>				
+			{% else %}
+			<li class="nav-item">
+				<a class="nav-link" href="{% url 'login' %} ">Login</a>
+				</li>
+			{% endif %}
 		</ul>
 		<!-- End Menu -->
 		<!-- Begin Search -->
@@ -66,9 +75,9 @@
 ================================================== -->
 <div class="container">
 	<div class="mainheading">
-		<h1 class="sitetitle">Mediumish</h1>
+		<h1 class="sitetitle">Titulo del blog</h1>
 		<p class="lead">
-			  theme, medium style, simply perfect for bloggers
+			  descripción del blog
 		</p>
 	</div>
 <!-- End Site Title
@@ -78,7 +87,7 @@
 	================================================== -->
 	<section class="featured-posts">
 	<div class="section-title">
-		<h2><span>Featured {{ mensaje }}</span></h2>
+		<h2><span>{{ mensaje }}</span></h2>
 	</div>
 	<div class="card-columns listfeaturedtag">
 

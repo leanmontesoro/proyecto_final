@@ -9,7 +9,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 <link rel="icon" href="{% static 'assets/img/favicon.ico' %}">
-<title>Mediumish - A Medium style template by WowThemes.net</title>
+<!-- <title>Mediumish - A Medium style template by WowThemes.net</title> -->
 <!-- Bootstrap core CSS -->
 <link href="{% static 'assets/css/bootstrap.min.css' %}" rel="stylesheet">
 <!-- Fonts -->
@@ -29,7 +29,7 @@
 <div class="container">
 	<!-- Begin Logo -->
 	<a class="navbar-brand" href="index.html">
-	<img src="static/assets/img/logo.png" alt="logo">
+	<img src="{% static 'assets/img/logo.png' %}" alt="logo">
 	</a>
 	<!-- End Logo -->
 	<div class="collapse navbar-collapse" id="navbarsExampleDefault">
@@ -47,7 +47,16 @@
 			<li class="nav-item">
 				<a class="nav-link" href="{% url 'register' %} ">SignUP</a>
 				</li>
-				
+			{% if user.is_authenticated %}				
+			<li class="nav-item">
+				<a class="nav-link" href="{% url 'logout' %} ">Logout</a>
+				<p>{{ imagen }} {{ user.username }}</p>
+				</li>				
+			{% else %}
+			<li class="nav-item">
+				<a class="nav-link" href="{% url 'login' %} ">Login</a>
+				</li>
+			{% endif %}
 		</ul>
 		<!-- End Menu -->
 		<!-- Begin Search -->
@@ -64,22 +73,31 @@
 
 <!-- Begin Site Title
 ================================================== -->
-<div class="container">
+
+{% block titulo_descripcion %}
+
+{% endblock %}
+<!-- <div class="container">
 	<div class="mainheading">
-		<h1 class="sitetitle">Mediumish</h1>
+		<h1 class="sitetitle">Titulo del blog</h1>
 		<p class="lead">
-			 Bootstrap theme, medium style, simply perfect for bloggers
+			  descripción del blog
 		</p>
-	</div>
+	</div> -->
 <!-- End Site Title
 ================================================== -->
 
 	<!-- Begin Featured
 	================================================== -->
 	<section class="featured-posts">
-	<div class="section-title">
-		<h2><span>Featured</span></h2>
-	</div>
+		{% block mensaje %}
+
+		{% endblock %}
+	<!-- <div class="section-title">
+		<h2><span>{{ mensaje }}</span></h2>
+	</div> -->
+
+
 	<div class="card-columns listfeaturedtag">
 
 		<!-- begin post -->
@@ -87,7 +105,7 @@
 			<div class="row">
 				<div class="col-md-5 wrapthumbnail">
 					<a href="post.html">
-						<div class="thumbnail" style="background-image:url(static/assets/img/demopic/1.jpg);">
+						<div class="thumbnail" style="background-image:url(	'{% static 'assets/img/demopic/1.jpg' %}'	);">
 						</div>
 					</a>
 				</div>
@@ -118,7 +136,7 @@
 			<div class="row">
 				<div class="col-md-5 wrapthumbnail">
 					<a href="post.html">
-						<div class="thumbnail" style="background-image:url(static/assets/img/demopic/2.jpg);">
+						<div class="thumbnail" style="background-image:url('{% static 'assets/img/demopic/2.jpg' %}');">
 						</div>
 					</a>
 				</div>
@@ -149,7 +167,7 @@
 			<div class="row">
 				<div class="col-md-5 wrapthumbnail">
 					<a href="post.html">
-						<div class="thumbnail" style="background-image:url(static/assets/img/demopic/3.jpg);">
+						<div class="thumbnail" style="background-image:url('{% static 'assets/img/demopic/3.jpg' %}');">
 						</div>
 					</a>
 				</div>
@@ -180,7 +198,7 @@
 			<div class="row">
 				<div class="col-md-5 wrapthumbnail">
 					<a href="post.html">
-						<div class="thumbnail" style="background-image:url(static/assets/img/demopic/4.jpg);">
+						<div class="thumbnail" style="background-image:url('{% static 'assets/img/demopic/4.jpg' %}');">
 						</div>
 					</a>
 				</div>
@@ -222,7 +240,7 @@
 		<!-- begin post -->
 		<div class="card">
 			<a href="post.html">
-				<img class="img-fluid" src="static/assets/img/demopic/5.jpg" alt="">
+				<img class="img-fluid" src="{% static 'assets/img/demopic/5.jpg' %}" alt="">
 			</a>
 			<div class="card-block">
 				<h2 class="card-title"><a href="post.html">Autumn doesn't have to be nostalgic, you know?</a></h2>
@@ -246,7 +264,7 @@
 		<!-- begin post -->
 		<div class="card">
 			<a href="post.html">
-				<img class="img-fluid" src="static/assets/img/demopic/6.jpg" alt="">
+				<img class="img-fluid" src="{% static 'assets/img/demopic/6.jpg' %}" alt="">
 			</a>
 			<div class="card-block">
 				<h2 class="card-title"><a href="post.html">Best galleries in the world with photos</a></h2>
@@ -270,7 +288,7 @@
 		<!-- begin post -->
 		<div class="card">
 			<a href="post.html">
-				<img class="img-fluid" src="static/assets/img/demopic/7.jpg" alt="">
+				<img class="img-fluid" src="{% static 'assets/img/demopic/7.jpg' %}" alt="">
 			</a>
 			<div class="card-block">
 				<h2 class="card-title"><a href="post.html">Little red dress and a perfect summer</a></h2>
@@ -294,7 +312,7 @@
 		<!-- begin post -->
 		<div class="card">
 			<a href="post.html">
-				<img class="img-fluid" src="static/assets/img/demopic/8.jpg" alt="">
+				<img class="img-fluid" src="{% static 'assets/img/demopic/8.jpg' %}" alt="">
 			</a>
 			<div class="card-block">
 				<h2 class="card-title"><a href="post.html">Thinking outside the box can help you prosper</a></h2>
@@ -318,7 +336,7 @@
 		<!-- begin post -->
 		<div class="card">
 			<a href="post.html">
-				<img class="img-fluid" src="static/assets/img/demopic/9.jpg" alt="">
+				<img class="img-fluid" src="{% static 'assets/img/demopic/9.jpg' %}" alt="">
 			</a>
 			<div class="card-block">
 				<h2 class="card-title"><a href="post.html">10 Things you should know about choosing your house</a></h2>
@@ -342,7 +360,7 @@
 		<!-- begin post -->
 		<div class="card">
 			<a href="post.html">
-				<img class="img-fluid" src="static/assets/img/demopic/10.jpg" alt="">
+				<img class="img-fluid" src="{% static 'assets/img/demopic/10.jpg' %}" alt="">
 			</a>
 			<div class="card-block">
 				<h2 class="card-title"><a href="post.html">Visiting the world means learning cultures</a></h2>
@@ -372,10 +390,10 @@
 	================================================== -->
 	<div class="footer">
 		<p class="pull-left">
-			 Copyright &copy; 2017 Your Website Name
+			 <!-- Copyright &copy; 2017 Your Website Name -->
 		</p>
 		<p class="pull-right">
-			 Mediumish Theme by <a target="_blank" href="https://www.wowthemes.net">WowThemes.net</a>
+			 <!-- Mediumish Theme by <a target="_blank" href="https://www.wowthemes.net">WowThemes.net</a> -->
 		</p>
 		<div class="clearfix">
 		</div>
@@ -389,9 +407,9 @@
 <!-- Bootstrap core JavaScript
     ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
-<script src="static/assets/js/jquery.min.js"></script>
+<script src="{% static 'assets/js/jquery.min.js' %}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
-<script src="static/assets/js/bootstrap.min.js"></script>
-<script src="static/assets/js/ie10-viewport-bug-workaround.js"></script>
+<script src="{% static 'assets/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'assets/js/ie10-viewport-bug-workaround.js' %}"></script>
 </body>
 </html>

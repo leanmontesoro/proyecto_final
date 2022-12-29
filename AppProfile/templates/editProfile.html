@@ -66,11 +66,13 @@
 ================================================== -->
 <div class="container">
 	<div class="mainheading">
-		<h1 class="sitetitle">Login</h1>
+		<!-- TODO: bloque variable -->
+		<h1 class="sitetitle">Edit profile</h1>
 		<p class="lead">
-			 Formulario de login
+			 
 		</p>
 	</div>
+		<!-- TODO: bloque variable -->
 <!-- End Site Title
 ================================================== -->
 
@@ -78,11 +80,11 @@
 	================================================== -->
 	<section class="featured-posts">
 	<div class="section-title">
-		<h2><span>{{ mensaje }}</span></h2>
+		<h2><span>Editando el usuario {{ nombreusuario }}</span></h2>
 	</div>
 		
 
-	<form action="{% url 'login'  %}" method="POST"> {% csrf_token %}
+	<form action="{% url 'editProfile'  %}" method="POST"> {% csrf_token %}
 
 		<table>
 				
@@ -90,7 +92,7 @@
 				
 		</table>
 				
-		<input type="submit" value="Ingresar">
+		<input type="submit" value="Modificar Usuario">
 				
 				
 		</form>

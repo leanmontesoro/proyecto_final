@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'AppLogin',
     'AppProfile',
     'AppsignUp',
+    'AppMain',
     
 ]
 
@@ -126,6 +127,9 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-#LOGIN_URL='/AppsignUp/padre/'
+LOGIN_URL='/AppLogin/login/'
 
-#LOGOUT_REDIRECT_URL='/AppsignUp/padre/'
+LOGOUT_REDIRECT_URL='login'
+
+MEDIA_URL= '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
