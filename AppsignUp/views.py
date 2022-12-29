@@ -1,12 +1,11 @@
 from django.shortcuts import render
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
-
+from django.contrib.auth import login, authenticate
 from AppsignUp.forms import RegistroUsuarioForm
 
 
-# def registrar(request):
-        
-#     return render (request, "signUp.html")
+def inicio(request):
+    return render(request, "padre.html")
 
 
 def register(request):
@@ -14,11 +13,14 @@ def register(request):
         form=RegistroUsuarioForm(request.POST)
         if form.is_valid():
             username=form.cleaned_data.get("username")
+            clave=form.cleaned_data.get("password1")
             form.save()
             #aca se podria loguear el usuario, con authenticate y login... pero no lo hago
-            return render(request, "", {"mensaje":f"Usuario {username} creado correctamente"})
+            usuario=authenticate(username=username, password=clave)#trae un usuario de la base, que tenga ese usuario y ese pass, si existe, lo trae y si no None
+            login(request, usuario)
+            return render(request, "padre.html", {"mensaje":f"Bienvenido {username} !"})
         else:
-            return render(request, "index.html", {"form":form, "mensaje":"Error al crear el usuario"})
+            return render(request, "signUp.html", {"form":form, "mensaje":"Error al crear el usuario"}) ##pincha
      
     else:
         form=RegistroUsuarioForm()

@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'AppLogin',
     'AppProfile',
     'AppsignUp',
-    'AppMain',
+    
 ]
 
 MIDDLEWARE = [
@@ -126,6 +126,6 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-LOGIN_URL='/AppMain/padre/'
+#LOGIN_URL='/AppsignUp/padre/'
 
-LOGOUT_REDIRECT_URL='/AppMain/padre/'
+#LOGOUT_REDIRECT_URL='/AppsignUp/padre/'

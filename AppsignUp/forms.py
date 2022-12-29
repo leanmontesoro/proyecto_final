@@ -14,7 +14,7 @@ class ProfeForm(forms.Form):
     profesion = forms.CharField(max_length=50)
 
 class RegistroUsuarioForm(UserCreationForm):
-    #estoy cambiando el usercreationform por uno propio
+    #sobreescribo usercreationform por uno propio
     email = forms.EmailField()
     password1= forms.CharField(label="Ingrese Contraseña", widget=forms.PasswordInput)
     password2= forms.CharField(label="Repita Contraseña", widget=forms.PasswordInput)
@@ -22,7 +22,7 @@ class RegistroUsuarioForm(UserCreationForm):
     class Meta:
         model = User
         fields = ["username", "email", "password1", "password2"]
-        help_texts = {k:"" for k in fields}#para cada uno de los campos del formulario, le asigna un valor vacio
+        help_texts = {k:"" for k in fields}
     
 class UserEditForm(UserCreationForm):
     email = forms.EmailField()
