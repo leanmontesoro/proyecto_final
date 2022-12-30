@@ -2,6 +2,14 @@
 
 {% load static %}
 
+
+{% block useravatar %}
+<li class="nav-item">							
+	<img src= "{{ imagen }}" class="img" alt="">
+	<p> {{ user.username }} </p>
+</li>
+	{% endblock %}
+
 {% block descripcion %}
 
 <div class="container">
@@ -13,7 +21,6 @@
 	</div>
 
 {% endblock %}
-
 
 {% block mensaje %}
 	<div class="section-title">
