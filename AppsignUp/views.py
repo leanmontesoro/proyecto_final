@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth import login, authenticate
 from AppsignUp.forms import RegistroUsuarioForm
-from AppMain.models import Avatar
+from AppMain.models import Avatar,Entrada
 
 def obtenerAvatar(request):
     lista=Avatar.objects.filter(user=request.user)
@@ -25,7 +25,8 @@ def register(request):
             
             usuario=authenticate(username=username, password=clave)
             login(request, usuario)
-            return render(request, "index.html", {"mensaje":f"Bienvenido {username} !","imagen":obtenerAvatar(request)})
+            entradas=Entrada.objects.all()
+            return render(request, "index.html", {"entradas":entradas,"mensaje":f"Bienvenido {username} !","imagen":obtenerAvatar(request)})
         else:
             return render(request, "signUp.html", {"form":form, "mensaje":"Error al crear el usuario"}) 
     

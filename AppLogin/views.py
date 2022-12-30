@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth import login, authenticate
-from AppMain.models import Avatar
+from AppMain.models import Avatar,Entrada
 
 
 
@@ -24,7 +24,8 @@ def login_req(request):
 
             if usuario is not None:    
                 login(request, usuario)
-                return render(request, 'index.html', {'mensaje':f"Bienvenido {usuario}",'titulo':"CookAlgo",'descripcion':"","imagen":obtenerAvatar(request)} )
+                entradas=Entrada.objects.all()
+                return render(request, 'index.html', {"entradas":entradas,'mensaje':f"Bienvenido {usuario}",'titulo':"CookAlgo",'descripcion':"","imagen":obtenerAvatar(request)} )
             else:
                 return render(request, 'login.html', {'mensaje':"Usuario o contraseña incorrectos", 'form':form})
 

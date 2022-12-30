@@ -18,7 +18,7 @@ def obtenerAvatar(request):
 def inicio(request):
     entradas=Entrada.objects.all()
     return render (request, "index.html",{"entradas":entradas,"titulo":"Blog title index","descripcion":"descripción en index"})
-    #return render (request, "index.html", {"imagen":obtenerAvatar(request)})
+    
     
 
 
