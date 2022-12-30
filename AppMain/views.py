@@ -31,7 +31,7 @@ def agregarAvatar(request):
                 avatarViejo[0].delete()
             avatar=Avatar(user=request.user, imagen=request.FILES["imagen"])
             avatar.save()
-            return render(request, "index.html", {"mensaje":"Avatar agregado correctamente"})
+            return render(request, "index.html", {"mensaje":"Avatar agregado correctamente","imagen":obtenerAvatar(request)})
         else:
             return render(request, "addAvatar.html", {"form": form, "usuario": request.user})
     else:
