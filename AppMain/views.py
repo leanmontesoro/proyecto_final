@@ -16,8 +16,8 @@ def obtenerAvatar(request):
     
 
 def inicio(request):
-    
-    return render (request, "index.html",{"titulo":"Blog title index","descripcion":"descripción en index"})
+    entradas=Entrada.objects.all()
+    return render (request, "index.html",{"entradas":entradas,"titulo":"Blog title index","descripcion":"descripción en index"})
     #return render (request, "index.html", {"imagen":obtenerAvatar(request)})
     
 
@@ -67,4 +67,14 @@ def leerEntradas(request):
     entradas=Entrada.objects.all()
     #print(entradas)
     return render(request, "index.html", {"entradas":entradas,"titulo":"Entradas disponibles","imagen":obtenerAvatar(request)})
+
+def homeDeleteEntradas(request):
+    entradas=Entrada.objects.all()
+    return render(request, "deleteEntrada.html", {"entradas":entradas,"titulo":"Eliminar entradas","imagen":obtenerAvatar(request)})
+
+def deleteEntradas(request, id):
+    entrada=Entrada.objects.get(id=id)
+    entrada.delete()
+    entradas=Entrada.objects.all()
     
+    return render(request, "deleteEntrada.html", {"entradas":entradas,"titulo":"Eliminar entradas","imagen":obtenerAvatar(request)})

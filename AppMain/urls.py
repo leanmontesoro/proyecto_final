@@ -1,5 +1,5 @@
 from django.urls import path
-from AppMain.views import inicio,agregarAvatar,addEntrada,leerEntradas
+from AppMain.views import inicio,agregarAvatar,addEntrada,leerEntradas,deleteEntradas,homeDeleteEntradas
 from AppLogin.views import login_req
 from AppsignUp.views import register
 from AppProfile.views import editarPerfil
@@ -14,5 +14,7 @@ urlpatterns = [
     path("editProfile/", editarPerfil, name="editProfile"),
     path("agregarAvatar/", agregarAvatar, name="agregarAvatar"),
     path("agregarEntrada/", addEntrada, name="agregarEntrada"),
-    path("leerEntradas/", leerEntradas, name="leerEntradas")
+    path("leerEntradas/", leerEntradas, name="leerEntradas"),
+    path("homeDeleteEntradas/", homeDeleteEntradas, name="homeDeleteEntradas"),
+    path("deleteEntradas/<id>", deleteEntradas, name="deleteEntradas"),
 ]

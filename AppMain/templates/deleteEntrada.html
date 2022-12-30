@@ -1,0 +1,47 @@
+{% extends "padre.html" %}
+
+{% load static %}
+
+{% block useravatar %}
+<li class="nav-item">							
+	<img src= "{{ imagen }}" class="img" alt="">
+	<p> {{ user.username }} </p>
+</li>
+	{% endblock %}
+
+{% block descripcion %}
+
+<div class="container">
+	<div class="mainheading">
+		<h1 class="sitetitle">{{ titulo }} </h1>
+		<p class="lead">
+			  {{ descripcion }}
+		</p>
+	</div>
+
+{% endblock %}
+
+{% block mensaje %}
+	<div class="section-title">
+		<h2><span>{{ mensaje }}</span></h2>
+	</div> 
+
+{% endblock %}
+
+{% if entradas %}
+
+	{% block entradas_delete %}
+
+	<ul>
+		{% for entrada in entradas %}
+		<form action="{% url 'deleteEntradas' entrada.id %}" method="POST"> {% csrf_token %}
+        <li>{{entrada.titulo}}</li> 
+		<input type="submit" value="Eliminar" >
+        <br>
+		{% endfor %}
+	</ul>
+	{% endblock %}
+{% else %}
+
+	<p> NO HAY ENTRADAS </p>
+{% endif %}
