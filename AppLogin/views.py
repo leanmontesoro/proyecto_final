@@ -14,7 +14,7 @@ def login_req(request):
 
             if usuario is not None:    
                 login(request, usuario)
-                return render(request, 'index.html', {'mensaje':f"Bienvenido {usuario}" })
+                return render(request, 'index.html', {'mensaje':f"Bienvenido {usuario}",'titulo':"CookAlgo",'descripcion':"" })
             else:
                 return render(request, 'login.html', {'mensaje':"Usuario o contraseña incorrectos", 'form':form})
 

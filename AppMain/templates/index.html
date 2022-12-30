@@ -6,9 +6,9 @@
 
 <div class="container">
 	<div class="mainheading">
-		<h1 class="sitetitle">Titulo de herencia</h1>
+		<h1 class="sitetitle">{{ titulo }} </h1>
 		<p class="lead">
-			  descripción del blog
+			  {{ descripcion }}
 		</p>
 	</div>
 
@@ -17,7 +17,7 @@
 
 {% block mensaje %}
 	<div class="section-title">
-		<h2><span>MSJ</span></h2>
+		<h2><span>{{ mensaje }}</span></h2>
 	</div> 
 
 {% endblock %}
