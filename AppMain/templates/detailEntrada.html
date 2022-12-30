@@ -30,9 +30,8 @@
 
 {% block entradas %}
 
-	{% if entradas %}
-
-	{% for entrada in entradas %}
+	<!-- {% if entrada %} -->
+	
 	<div class="card">
 		<div class="row">
 			<div class="col-md-5 wrapthumbnail">
@@ -61,20 +60,20 @@
 			</div>
 		</div>
 	</div>
-	{% endfor %}
-	{% else %}
+	
+	<!-- {% else %}
 
 	<div class="container">
 		<div class="mainheading">
-			<h1 class="sitetitle">No existen entradas </h1>
+			<h1 class="sitetitle">Error al cargar la entrada </h1>
 			<form action="{% url 'agregarEntrada' %}" method="GET"> {% csrf_token %}
 				
-				<input type="submit" value="Agrega una nueva!" >
+				
 			<p class="lead">
 			
 			</p>
 		</div>
-	{% endif %}
+	{% endif %} -->
 	
 
 
