@@ -14,7 +14,7 @@ def obtenerAvatar(request):
 
 def inicio(request):
 
-    lista=Avatar.objects.filter(user=request.user)
+    #lista=Avatar.objects.filter(user=request.user)
     
-    return render (request, "index.html", {"imagen":obtenerAvatar(request)})
-       #return render (request, "index.html")
+    #return render (request, "index.html", {"imagen":obtenerAvatar(request)})
+       return render (request, "index.html")
