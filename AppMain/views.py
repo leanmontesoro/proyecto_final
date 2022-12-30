@@ -62,4 +62,9 @@ def addEntrada(request):
         form=EntradaForm()
         return render (request, "addEntrada.html", {"form":form, "imagen":obtenerAvatar(request)})
 
+
+def leerEntradas(request):
+    entradas=Entrada.objects.all()
+    #print(entradas)
+    return render(request, "index.html", {"entradas":entradas,"titulo":"Entradas disponibles","imagen":obtenerAvatar(request)})
     
