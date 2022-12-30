@@ -30,6 +30,8 @@
 
 {% block entradas %}
 
+	{% if entradas %}
+
 	{% for entrada in entradas %}
 	<div class="card">
 		<div class="row">
@@ -59,9 +61,18 @@
 			</div>
 		</div>
 	</div>
-	
-
 	{% endfor %}
+	{% else %}
+
+	<div class="container">
+		<div class="mainheading">
+			<h1 class="sitetitle">No existen entradas </h1>
+			<p class="lead">
+			
+			</p>
+		</div>
+	{% endif %}
+	
 
 
 
