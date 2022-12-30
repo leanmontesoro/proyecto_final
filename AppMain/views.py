@@ -56,7 +56,8 @@ def addEntrada(request):
 
             entrada= Entrada(titulo=titulo,subtitulo=subtitulo,cuerpo=cuerpo,autor=autor,fecha=fecha,imagen=imagen)
             entrada.save()
-            return render (request, "index.html", {"mensaje": "Entrada creada correctamente!", "imagen":obtenerAvatar(request)})
+            entradas=Entrada.objects.all()
+            return render (request, "index.html", {"entradas":entradas,"mensaje": "Entrada creada correctamente!", "imagen":obtenerAvatar(request)})
     else:
 
         form=EntradaForm()
