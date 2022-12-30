@@ -16,7 +16,7 @@ def editarPerfil(request):
             usuario.first_name=info["first_name"]
             usuario.last_name=info["last_name"]
             usuario.save()
-            return render(request, "index.html", {"mensaje":"Perfil editado correctamente"})
+            return render(request, "index.html", {"mensaje":"Perfil editado correctamente","titulo":"CookAlgo Edit Perfil"})
         else:
             return render(request, "editProfile.html", {"form":form, "nombreusuario":usuario.username, "mensaje":"Error al editar el perfil"})
     else:

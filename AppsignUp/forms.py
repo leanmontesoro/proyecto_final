@@ -15,6 +15,7 @@ class ProfeForm(forms.Form):
 
 class RegistroUsuarioForm(UserCreationForm):
     #sobreescribo usercreationform por uno propio
+    username=forms.CharField(label='User')
     first_name=forms.CharField(label='Nombre')
     last_name=forms.CharField(label='Apellido')
     email = forms.EmailField()

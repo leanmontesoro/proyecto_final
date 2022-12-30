@@ -17,7 +17,7 @@ class UserEditForm(UserCreationForm):
         help_texts = {k:"" for k in fields} 
 
 class UserEditForm(UserCreationForm):
-    username= forms.CharField(label="Editar nombre de usuario")
+    
     email = forms.EmailField()
     password1= forms.CharField(label="Ingrese Contraseña", widget=forms.PasswordInput)
     password2= forms.CharField(label="Repita Contraseña", widget=forms.PasswordInput)
@@ -26,7 +26,7 @@ class UserEditForm(UserCreationForm):
 
     class Meta:
         model = User
-        fields = [ 'username','email', 'password1', 'password2', 'first_name', 'last_name']
+        fields = [ 'email', 'password1', 'password2', 'first_name', 'last_name']
         help_texts = {k:"" for k in fields} 
 
 class AvatarForm(forms.Form):
