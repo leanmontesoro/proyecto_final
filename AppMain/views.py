@@ -1,8 +1,10 @@
 from django.shortcuts import render
 from django.contrib.auth.mixins import LoginRequiredMixin #para vistas basadas en clases CLASS
 from django.contrib.auth.decorators import login_required #para vistas basadas en funciones DEF 
-from AppMain.models import Avatar 
-from AppMain.forms import AvatarForm
+from AppMain.models import Avatar,Entrada
+from AppMain.forms import AvatarForm,EntradaForm
+
+
 
 def obtenerAvatar(request):
     lista=Avatar.objects.filter(user=request.user)
@@ -14,9 +16,8 @@ def obtenerAvatar(request):
     
 
 def inicio(request):
-
-    # lista=Avatar.objects.filter(user=request.user)
-    return render (request, "index.html")
+    
+    return render (request, "index.html",{"titulo":"Blog title index","descripcion":"descripción en index"})
     #return render (request, "index.html", {"imagen":obtenerAvatar(request)})
     
 
@@ -36,4 +37,29 @@ def agregarAvatar(request):
             return render(request, "addAvatar.html", {"form": form, "usuario": request.user})
     else:
         form=AvatarForm()
-        return render(request , "addAvatar.html", {"form": form, "usuario": request.user})
+        return render(request , "addAvatar.html", {"form": form, "usuario": request.user,"imagen":obtenerAvatar(request)})
+
+
+def addEntrada(request):
+
+    if request.method=="POST":
+        form=EntradaForm(request.POST, request.FILES)
+        if form.is_valid():
+            informacion=form.cleaned_data
+
+            titulo=informacion["titulo"]
+            subtitulo=informacion["subtitulo"]
+            cuerpo=informacion["cuerpo"]
+            autor=informacion["autor"]
+            fecha=informacion["fecha"]
+            imagen=informacion["imagen"]
+
+            entrada= Entrada(titulo=titulo,subtitulo=subtitulo,cuerpo=cuerpo,autor=autor,fecha=fecha,imagen=imagen)
+            entrada.save()
+            return render (request, "index.html", {"mensaje": "Entrada creada correctamente!", "imagen":obtenerAvatar(request)})
+    else:
+
+        form=EntradaForm()
+        return render (request, "addEntrada.html", {"form":form, "imagen":obtenerAvatar(request)})
+
+    

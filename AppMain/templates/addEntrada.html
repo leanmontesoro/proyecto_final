@@ -85,7 +85,7 @@
 <div class="container">
 	<div class="mainheading">
 		<!-- TODO: bloque variable -->
-		<h1 class="sitetitle">Agregar avatar</h1>
+		<h1 class="sitetitle">Agregar entrada al blog</h1>
 		<p class="lead">
 			 
 		</p>
@@ -98,11 +98,11 @@
 	================================================== -->
 	<section class="featured-posts">
 	<div class="section-title">
-		<h2><span>Agregando avatar para {{ usuario }}</span></h2>
+		<h2><span> </span></h2>
 	</div>
 		
 
-	<form action="{% url 'agregarAvatar'  %}" method="POST" enctype="multipart/form-data"> {% csrf_token %}
+	<form action="{% url 'agregarEntrada'  %}" method="POST" enctype="multipart/form-data"> {% csrf_token %}
 
 		<table>
 				
@@ -110,7 +110,7 @@
 				
 		</table>
 				
-		<input type="submit" value="Cargar Avatar">
+		<input type="submit" value="Cargar Entrada">
 				
 				
 		</form>

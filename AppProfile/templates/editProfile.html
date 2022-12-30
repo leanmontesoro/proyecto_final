@@ -8,6 +8,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="description" content="">
 <meta name="author" content="">
+<style>
+	.img{
+		margin-top: 14px;
+		margin-left: 14px;
+		width: 30px;
+		height: 30px;
+
+	}
+</style>
 <link rel="icon" href="{% static 'assets/img/favicon.ico' %}">
 <title>Mediumish - A Medium style template by WowThemes.net</title>
 <!-- Bootstrap core CSS -->
@@ -48,10 +57,10 @@
 				<a class="nav-link" href="{% url 'register' %} ">SignUP</a>
 				</li>
 			{% if user.is_authenticated %}				
-			<li class="nav-item">
-				<a class="nav-link" href="{% url 'logout' %} ">Logout</a>
-				<p>{{ imagen }} {{ user.username }}</p>
-				</li>				
+			<li class="nav-item">							
+				<img src= "{{ imagen }}" class="img" alt="">
+				<p> {{ user.username }} </p>
+			</li>			
 			{% else %}
 			<li class="nav-item">
 				<a class="nav-link" href="{% url 'login' %} ">Login</a>

@@ -9,3 +9,14 @@ class Avatar(models.Model):
 
     def __str__(self):
         return f"{self.user} - {self.imagen}"
+
+class Entrada(models.Model):
+    titulo=models.CharField(max_length=50)
+    subtitulo=models.CharField(max_length=50)
+    cuerpo=models.CharField(max_length=5000)
+    autor=models.CharField(max_length=50)
+    fecha=models.DateField()
+    imagen=models.ImageField(upload_to='avatares')
+
+    def __str__(self):
+        return self.titulo+" "+self.subtitulo

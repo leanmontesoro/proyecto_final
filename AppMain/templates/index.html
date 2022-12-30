@@ -2,7 +2,6 @@
 
 {% load static %}
 
-
 {% block useravatar %}
 <li class="nav-item">							
 	<img src= "{{ imagen }}" class="img" alt="">
@@ -29,3 +28,18 @@
 
 {% endblock %}
 
+{% block form %}
+<form action="{% url 'agregarEntrada'  %}" method="POST"> {% csrf_token %}
+
+	<table>
+			
+		{{ form.as_table }}
+			
+	</table>
+			
+	<input type="submit" value="Agregar entrada">
+			
+			
+	</form>
+
+{% endblock %}
