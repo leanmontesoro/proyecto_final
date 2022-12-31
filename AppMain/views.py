@@ -83,5 +83,4 @@ def deleteEntradas(request, id):
 def detailEntrada(request,id):
     entrada=Entrada.objects.get(id=id)
     
-    print(entrada.titulo)
     return render(request, "detailEntrada.html", {"entrada":entrada,"titulo":"titulo","imagen":obtenerAvatar(request)})    
