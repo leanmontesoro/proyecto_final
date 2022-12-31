@@ -90,6 +90,31 @@ def detailEntrada(request,id):
     
     return render(request, "detailEntrada.html", {"entrada":entrada,"titulo":"Blog","imagen":obtenerAvatar(request)}) 
 
+#TODO: @login_required
+def editEntrada(request):
+    entradas=Entrada.objects.all()
+    if request.method=="POST":
+        form=EntradaForm(request.POST)
+        
+        if form.is_valid():
+            info=form.cleaned_data
+            entradas.titulo=info["titulo"]
+            entradas.subtitulo=info["subtitulo"]
+            entradas.cuerpo=info["cuerpo"]
+            entradas.resume=info["resume"]
+            entradas.read_time=info["read_time"]
+            entradas.autor=info["autor"]
+            entradas.fecha=info["fecha"]
+            entradas.imagen=info["imagen"]
+            entradas.save()
+            return render(request, "index.html", {"entradas":entradas,"entrada_titulo":entradas.titulo,"mensaje":"Entrada editado correctamente","titulo":"BloGastro","imagen":obtenerAvatar(request)})
+        else:
+            return render(request, "editEntrada.html", {"form":form, "mensaje":"Error al editar la entrada"})
+    else:
+        form=EntradaForm(instance=entradas)
+        return render(request, "editEntrada.html", {"entradas":entradas,"form":form,"entrada_titulo":entradas.titulo,"imagen":obtenerAvatar(request)})
+
+
 def about(request):
     #entrada=Entrada.objects.get(id=id)
     

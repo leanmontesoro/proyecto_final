@@ -1,5 +1,5 @@
 from django.urls import path
-from AppMain.views import inicio,agregarAvatar,addEntrada,leerEntradas,deleteEntradas,homeDeleteEntradas,detailEntrada,about
+from AppMain.views import inicio,agregarAvatar,addEntrada,leerEntradas,deleteEntradas,homeDeleteEntradas,detailEntrada,about,editEntrada
 from AppLogin.views import login_req
 from AppsignUp.views import register
 from AppProfile.views import editarPerfil
@@ -12,6 +12,7 @@ urlpatterns = [
     path("login/", login_req,name="login"),
     path('logout/', LogoutView.as_view(), name='logout'),
     path("editProfile/", editarPerfil, name="editProfile"),
+    path("editEntrada/", editEntrada, name="editEntrada"),
     path("agregarAvatar/", agregarAvatar, name="agregarAvatar"),
     path("agregarEntrada/", addEntrada, name="agregarEntrada"),
     path("leerEntradas/", leerEntradas, name="leerEntradas"),

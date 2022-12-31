@@ -47,35 +47,24 @@
 			<li class="nav-item active">
 			<a class="nav-link" href="{% url 'inicio' %}">Home <span class="sr-only">(current)</span></a>
 			</li>
-
+			<li class="nav-item">
+			<a class="nav-link" href="post.html">Post</a>
+			</li>
 			<li class="nav-item">
 			<a class="nav-link" href="author.html">Author</a>
 			</li>
-
-			{% if user.is_authenticated %}
 			<li class="nav-item">
-				<a class="nav-link" href="{% url 'logout' %} ">Logout</a>
-				
+				<a class="nav-link" href="{% url 'register' %} ">SignUP</a>
 				</li>
-			
+			{% if user.is_authenticated %}				
 			<li class="nav-item">							
-				<a href= "{% url 'editProfile' %}"> 
 				<img src= "{{ imagen }}" class="img" alt="">
-				</a>
-				<a href="{% url 'editProfile' %}"> 
-					<p> {{ user.username }} </p> 
-				</a>
-				
+				<p> {{ user.username }} </p>
 			</li>			
-
-
 			{% else %}
 			<li class="nav-item">
 				<a class="nav-link" href="{% url 'login' %} ">Login</a>
 				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="{% url 'register' %} ">SignUP</a>
-					</li>				
 			{% endif %}
 		</ul>
 		<!-- End Menu -->
@@ -96,7 +85,7 @@
 <div class="container">
 	<div class="mainheading">
 		<!-- TODO: bloque variable -->
-		<h1 class="sitetitle">Acerca de mí</h1>
+		<h1 class="sitetitle">Editar entrada</h1>
 		<p class="lead">
 			 
 		</p>
@@ -111,42 +100,20 @@
 	<div class="section-title">
 		<h2><span> </span></h2>
 	</div>
-<div class="card-columns listfeaturedtag">		
-	<div class="card">
-		<div class="row">
-			<div class="col-md-5 wrapthumbnail">
-				<a href="post.html">
-					<div class="thumbnail" style="background-image:url(	'{% static 'assets/img/demopic/linkedin_perfil.jpg' %}'	);">
-					
-					</div>
-				</a>
-			</div>
-			<div class="col-md-7">
-				<div class="card-block">
-					<h2 class="card-title"><a href="">Leandro Montesoro</a></h2>
-					<h4 class="card-text">28 años - DevOps<br>Realicé es te curso con la finalidad de ampliar mis conocimientos en programacion. La web es sobre un blog de recetas, ya que como buen argentino me gusta comer pero sobre todo agasajar con comida!</h4>
-					
-					
-					<div class="metafooter">
-						<div class="wrapfooter">
-							<span class="meta-footer-thumb">
-							<a href="https://www.linkedin.com/in/leandro-montesoro-8a141596/"><img class="author-thumb" src="{% static 'assets/img/demopic/linkedin_icon.png' %}" alt="Sal"></a>
-							</span>
-							<a href="https://github.com/leanmontesoro?tab=repositories"><img class="author-thumb" src="{% static 'assets/img/demopic/github_icon.png' %}" alt="Sal"></a>
-						</span>
-					</span>
-					<a href="https://www.facebook.com/leanmontesoro/"><img class="author-thumb" src="{% static 'assets/img/demopic/facebook_icon.png' %}" alt="Sal"></a>
-				</span>
-				
+		
 
-							
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
+	<form action="{% url 'editEntrada'  %}" method="POST" enctype="multipart/form-data"> {% csrf_token %}
+
+		<table>
+				
+			{{ form.as_table }}
+				
+		</table>
+				
+		<input type="submit" value="Editar Entrada">
+				
+				
+		</form>
 
 		
 	<!-- Begin Footer

@@ -19,6 +19,6 @@ class Entrada(models.Model):
     autor=models.CharField(max_length=50)
     fecha=models.DateField()
     imagen=models.ImageField(upload_to='avatares')
-
+    user=models.ForeignKey(User, on_delete=models.CASCADE)
     def __str__(self):
         return self.titulo+" "+self.subtitulo
