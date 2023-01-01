@@ -45,19 +45,21 @@ def addEntrada(request):
     if request.method=="POST":
         form=EntradaForm(request.POST, request.FILES)
         if form.is_valid():
+            print("soy valido")
             informacion=form.cleaned_data
-
             titulo=informacion["titulo"]
             subtitulo=informacion["subtitulo"]
             cuerpo=informacion["cuerpo"]
             autor=informacion["autor"]
             fecha=informacion["fecha"]
             imagen=informacion["imagen"]
-
             entrada= Entrada(titulo=titulo,subtitulo=subtitulo,cuerpo=cuerpo,autor=autor,fecha=fecha,imagen=imagen)
             entrada.save()
             entradas=Entrada.objects.all()
-            return render (request, "index.html", {"entradas":entradas,"mensaje": "Entrada creada correctamente!", "imagen":obtenerAvatar(request)})
+            
+        #print(entradas)
+        print("entre")
+        return render (request, "index.html", {"entradas":entradas,"mensaje": "Entrada creada correctamente!", "imagen":obtenerAvatar(request)})
     else:
 
         form=EntradaForm()
