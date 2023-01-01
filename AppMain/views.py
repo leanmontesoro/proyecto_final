@@ -67,7 +67,7 @@ def addEntrada(request):
 def leerEntradas(request):
     entradas=Entrada.objects.all()
     #print(entradas)
-    return render(request, "index.html", {"entradas":entradas,"titulo":"Entradas disponibles","imagen":obtenerAvatar(request)})
+    return render(request, "leerEditEntrada.html", {"entradas":entradas,"titulo":"Entradas disponibles","imagen":obtenerAvatar(request)})
 
 
 
@@ -109,11 +109,15 @@ def homeEditEntradas(request):
 #TODO: @login_required
 def editEntrada(request,id):
     entrada=Entrada.objects.get(id=id)
-    print(entrada)
+    
     if request.method=="POST":
         form=EntradaForm(request.POST)
-        
+        #print(request.POST)
+        print(EntradaForm())
+        print(form)
+        print("estoy en el post")
         if form.is_valid():
+            print("estoy en el post y soy valido")
             info=form.cleaned_data
             entrada.titulo=info["titulo"]
             entrada.subtitulo=info["subtitulo"]
@@ -122,17 +126,20 @@ def editEntrada(request,id):
             entrada.read_time=info["read_time"]
             entrada.autor=info["autor"]
             entrada.fecha=info["fecha"]
-            entrada.imagen=info["imagen"]
+            #entrada.imagen=info["imagen"]
             entrada.save()
             entradas=Entrada.objects.all()
-            return render(request, "index.html", {"entradas":entradas,"entrada_titulo":entradas.titulo,"mensaje":"Entrada editado correctamente","titulo":"BloGastro","imagen":obtenerAvatar(request)})
+            return render(request, "index.html", {"entradas":entradas,"mensaje":"Entrada editado correctamente","titulo":"BloGastro","imagen":obtenerAvatar(request)})
         else:
+            print("estoy en el post y no soy valido")
             return render(request, "editEntrada.html", {"form":form, "mensaje":"Error al editar la entrada"})
     else:
-        # form=EntradaForm(instance=entrada)
+        
         form=EntradaForm(initial={"titulo":entrada.titulo,"subtitulo":entrada.subtitulo,"cuerpo":entrada.cuerpo,"resume":entrada.resume,"read_time":entrada.read_time,"autor":entrada.autor,
-        "fecha":entrada.fecha,"imagen":entrada.imagen})
-        return render(request, "editEntrada.html", {"form":form,"entrada_titulo":entrada.titulo,"imagen":obtenerAvatar(request)})
+        "fecha":entrada.fecha})
+        print("estoy en el get")
+        
+        return render(request, "editEntrada.html", {"form":form,"imagen":obtenerAvatar(request),"entrada":entrada})
 
 
 def about(request):

@@ -17,4 +17,4 @@ class EntradaForm(forms.Form):
     read_time=forms.CharField(max_length=50)
     autor=forms.CharField(max_length=50)
     fecha=forms.DateField()
-    imagen=forms.ImageField()
+    #imagen=forms.ImageField()

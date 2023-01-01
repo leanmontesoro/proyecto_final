@@ -34,10 +34,17 @@
 
 	<ul>
 		{% for entrada in entradas %}
-		<form action="{% url 'editEntrada' entrada.id %}" method="POST"> {% csrf_token %}
-        <li>{{entrada.titulo}}</li> 
-		<input type="submit" value="Editar" >
-        <br>
+		<!-- <form action="{% url 'editEntrada' entrada.id %}" method="POST"> {% csrf_token %} -->
+        <li>{{entrada.titulo}}</li>
+		<li>{{entrada.subtitulo}}</li>
+		<li>{{entrada.cuerpo}}</li>
+		<li>{{entrada.autor}}</li>
+		<li>{{entrada.fecha}}</li> 
+		<li>{{entrada.resume}}</li>
+		<li>{{entrada.read_time}}</li>
+		<!-- <li>{{entrada.imagen}}</li> -->
+		<!-- <input type="submit" value="Editar" > -->
+        <a class="btn btn-success" href="{% url 'editEntrada' entrada.id %}">Editar</a>
 		{% endfor %}
 	</ul>
 	{% endblock %}

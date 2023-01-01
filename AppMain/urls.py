@@ -20,6 +20,7 @@ urlpatterns = [
     path("agregarEntrada/", addEntrada, name="agregarEntrada"),
     path("leerEntradas/", leerEntradas, name="leerEntradas"),
     path("detailEntrada/<id>", detailEntrada, name="detailEntrada"),
+    
     path("homeDeleteEntradas/", homeDeleteEntradas, name="homeDeleteEntradas"),
 
     path("homeEditEntradas/", homeEditEntradas, name="homeEditEntradas"),
