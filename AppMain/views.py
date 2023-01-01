@@ -69,14 +69,7 @@ def leerEntradas(request):
     #print(entradas)
     return render(request, "index.html", {"entradas":entradas,"titulo":"Entradas disponibles","imagen":obtenerAvatar(request)})
 
-def homeDeleteEntradas(request):
-    
-    if request.user.is_superuser > 0:
-        entradas=Entrada.objects.all()
-    else:
-        entradas=Entrada.objects.filter(autor=request.user)
 
-    return render(request, "deleteEntrada.html", {"entradas":entradas,"titulo":"Eliminar entradas","imagen":obtenerAvatar(request)})
 
 def deleteEntradas(request, id):
     entrada=Entrada.objects.get(id=id)
@@ -90,29 +83,56 @@ def detailEntrada(request,id):
     
     return render(request, "detailEntrada.html", {"entrada":entrada,"titulo":"Blog","imagen":obtenerAvatar(request)}) 
 
+
+def homeDeleteEntradas(request):
+    
+    if request.user.is_superuser > 0:
+        entradas=Entrada.objects.all()
+    else:
+        entradas=Entrada.objects.filter(autor=request.user)
+
+    return render(request, "deleteEntrada.html", {"entradas":entradas,"titulo":"Eliminar entradas","imagen":obtenerAvatar(request)})
+
+
+def homeEditEntradas(request):
+    
+    if request.user.is_superuser > 0:
+        entradas=Entrada.objects.all()
+    else:
+        entradas=Entrada.objects.filter(autor=request.user)
+
+    return render(request, "leerEditEntrada.html", {"entradas":entradas,"titulo":"Editar entradas","imagen":obtenerAvatar(request)})
+
+
+
+
 #TODO: @login_required
-def editEntrada(request):
-    entradas=Entrada.objects.all()
+def editEntrada(request,id):
+    entrada=Entrada.objects.get(id=id)
+    print(entrada)
     if request.method=="POST":
         form=EntradaForm(request.POST)
         
         if form.is_valid():
             info=form.cleaned_data
-            entradas.titulo=info["titulo"]
-            entradas.subtitulo=info["subtitulo"]
-            entradas.cuerpo=info["cuerpo"]
-            entradas.resume=info["resume"]
-            entradas.read_time=info["read_time"]
-            entradas.autor=info["autor"]
-            entradas.fecha=info["fecha"]
-            entradas.imagen=info["imagen"]
-            entradas.save()
+            entrada.titulo=info["titulo"]
+            entrada.subtitulo=info["subtitulo"]
+            entrada.cuerpo=info["cuerpo"]
+            entrada.resume=info["resume"]
+            entrada.read_time=info["read_time"]
+            entrada.autor=info["autor"]
+            entrada.fecha=info["fecha"]
+            entrada.imagen=info["imagen"]
+            entrada.save()
+            entradas=Entrada.objects.all()
             return render(request, "index.html", {"entradas":entradas,"entrada_titulo":entradas.titulo,"mensaje":"Entrada editado correctamente","titulo":"BloGastro","imagen":obtenerAvatar(request)})
         else:
             return render(request, "editEntrada.html", {"form":form, "mensaje":"Error al editar la entrada"})
     else:
-        form=EntradaForm(instance=entradas)
-        return render(request, "editEntrada.html", {"entradas":entradas,"form":form,"entrada_titulo":entradas.titulo,"imagen":obtenerAvatar(request)})
+        # form=EntradaForm(instance=entrada)
+        form=EntradaForm(initial={"titulo":entrada.titulo,"subtitulo":entrada.subtitulo,"cuerpo":entrada.cuerpo,"resume":entrada.resume,"read_time":entrada.read_time,"autor":entrada.autor,
+        "fecha":entrada.fecha,"imagen":entrada.imagen})
+        return render(request, "editEntrada.html", {"form":form,"entrada_titulo":entrada.titulo,"imagen":obtenerAvatar(request)})
 
 
 def about(request):

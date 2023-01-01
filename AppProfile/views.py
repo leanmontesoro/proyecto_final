@@ -15,6 +15,7 @@ def obtenerAvatar(request):
 #TODO: @login_required
 def editarPerfil(request):
     usuario=request.user
+    print(usuario)
     if request.method=="POST":
         form=UserEditForm(request.POST)
         entradas=Entrada.objects.all()
