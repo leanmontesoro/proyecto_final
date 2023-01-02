@@ -60,7 +60,7 @@ def addEntrada(request):
             return render (request, "index.html", {"entradas":entradas,"mensaje": "Entrada creada correctamente!", "imagen":obtenerAvatar(request)})
     else:
 
-        form=EntradaForm()
+        form=EntradaForm(initial={entrada.autor:request.user})
         return render (request, "addEntrada.html", {"form":form, "imagen":obtenerAvatar(request)})
 
 
