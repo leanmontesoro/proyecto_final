@@ -52,9 +52,11 @@ def addEntrada(request):
             cuerpo=informacion["cuerpo"]
             autor=informacion["autor"]
             fecha=informacion["fecha"]
+            resume=informacion["resume"]
+            read_time=informacion["read_time"]
             
 
-            entrada= Entrada(titulo=titulo,subtitulo=subtitulo,cuerpo=cuerpo,autor=autor,fecha=fecha)
+            entrada= Entrada(titulo=titulo,subtitulo=subtitulo,cuerpo=cuerpo,autor=autor,fecha=fecha,resume=resume,read_time=read_time)
             entrada.save()
             entradas=Entrada.objects.all()
             return render (request, "index.html", {"entradas":entradas,"mensaje": "Entrada creada correctamente!", "imagen":obtenerAvatar(request)})
@@ -81,7 +83,7 @@ def deleteEntradas(request, id):
 def detailEntrada(request,id):
     entrada=Entrada.objects.get(id=id)
     
-    return render(request, "detailEntrada.html", {"entrada":entrada,"titulo":"Blog","imagen":obtenerAvatar(request)}) 
+    return render(request, "detailEntrada.html", {"entrada":entrada,"titulo":"BloGastro","imagen":obtenerAvatar(request)}) 
 
 
 def homeDeleteEntradas(request):
