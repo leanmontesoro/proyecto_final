@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     'AppProfile',
     'AppsignUp',
     'AppMain',
+    'ckeditor', # CKEditor config
+    'ckeditor_uploader', # CKEditor media uploader
     
 ]
 
@@ -133,3 +135,6 @@ LOGOUT_REDIRECT_URL='login'
 
 MEDIA_URL= '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
+
+CKEDITOR_UPLOAD_PATH="uploads/"
+

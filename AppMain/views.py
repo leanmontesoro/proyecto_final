@@ -44,8 +44,9 @@ def addEntrada(request):
 
     if request.method=="POST":
         form=EntradaForm(request.POST, request.FILES)
+        
         if form.is_valid():
-            print("soy valido")
+
             informacion=form.cleaned_data
             titulo=informacion["titulo"]
             subtitulo=informacion["subtitulo"]
@@ -53,16 +54,23 @@ def addEntrada(request):
             autor=informacion["autor"]
             fecha=informacion["fecha"]
             imagen=informacion["imagen"]
+            
             entrada= Entrada(titulo=titulo,subtitulo=subtitulo,cuerpo=cuerpo,autor=autor,fecha=fecha,imagen=imagen)
             entrada.save()
             entradas=Entrada.objects.all()
-            
+           
         #print(entradas)
-        print("entre")
-        return render (request, "index.html", {"entradas":entradas,"mensaje": "Entrada creada correctamente!", "imagen":obtenerAvatar(request)})
-    else:
+            
+            return render (request, "index.html", {"entradas":entradas,"mensaje": "Entrada creada correctamente!", "imagen":obtenerAvatar(request)})
 
-        form=EntradaForm()
+        else:
+            print("estoy en el post y no soy valido")
+            print(form)
+            return render(request, "index.html", {"form":form, "mensaje":"Error al agregar la entrada"})
+    else:
+        
+        form=EntradaForm(initial={"autor":request.user})
+        
         return render (request, "addEntrada.html", {"form":form, "imagen":obtenerAvatar(request)})
 
 
@@ -76,9 +84,13 @@ def leerEntradas(request):
 def deleteEntradas(request, id):
     entrada=Entrada.objects.get(id=id)
     entrada.delete()
-    entradas=Entrada.objects.all()
     
-    return render(request, "deleteEntrada.html", {"entradas":entradas,"titulo":"Eliminar entradas","imagen":obtenerAvatar(request)})
+    if request.user.is_superuser > 0:
+        entradas=Entrada.objects.all()
+    else:
+        entradas=Entrada.objects.filter(autor=request.user)
+    
+    return render(request, "deleteEntrada.html", {"entradas":entradas,"titulo":"Entrada eliminada!","imagen":obtenerAvatar(request)})
 
 def detailEntrada(request,id):
     entrada=Entrada.objects.get(id=id)
