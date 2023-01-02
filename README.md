@@ -1,6 +1,7 @@
 # BloGastro - Leandro Montesoro
 
 Trabajé de manera individual en la creacion de un blog referido  a la gastronomía.
+En la rama principal del repo se encuentra el archivo .mp4 con el video del funcionamiento. "BloGastro.mp4"
 
 URL's relevantes para la navegacion:
 * inicio/: Home del blog
