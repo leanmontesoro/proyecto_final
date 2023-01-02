@@ -18,3 +18,9 @@ class EntradaForm(forms.Form):
     autor=forms.CharField(max_length=50)
     fecha=forms.DateField()
     #imagen=forms.ImageField()
+
+class MensajeForm(forms.Form):
+    emisor=forms.CharField(max_length=50)
+    receptor=forms.CharField(max_length=50)
+    cuerpo=forms.CharField(max_length=5000)
+    #leido=forms.BooleanField()

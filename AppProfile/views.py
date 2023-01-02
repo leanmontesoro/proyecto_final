@@ -27,7 +27,7 @@ def editarPerfil(request):
             usuario.first_name=info["first_name"]
             usuario.last_name=info["last_name"]
             usuario.web=info["web"]
-            usuario.image=info["image"]
+            #usuario.image=info["image"]
             usuario.save()
             return render(request, "index.html", {"entradas":entradas,"mensaje":"Perfil editado correctamente","titulo":"BloGastro","imagen":obtenerAvatar(request)})
         else:

@@ -22,3 +22,9 @@ class Entrada(models.Model):
     
     def __str__(self):
         return self.titulo+" "+self.subtitulo
+
+class Mensaje(models.Model):
+    emisor=models.CharField(max_length=50)
+    receptor=models.CharField(max_length=50)
+    cuerpo=models.CharField(max_length=5000)
+    leido=models.BooleanField()

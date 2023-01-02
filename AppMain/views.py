@@ -1,8 +1,8 @@
 from django.shortcuts import render
 from django.contrib.auth.mixins import LoginRequiredMixin #para vistas basadas en clases CLASS
 from django.contrib.auth.decorators import login_required #para vistas basadas en funciones DEF 
-from AppMain.models import Avatar,Entrada
-from AppMain.forms import AvatarForm,EntradaForm
+from AppMain.models import Avatar,Entrada,Mensaje
+from AppMain.forms import AvatarForm,EntradaForm,MensajeForm
 
 
 
@@ -52,21 +52,21 @@ def addEntrada(request):
             cuerpo=informacion["cuerpo"]
             autor=informacion["autor"]
             fecha=informacion["fecha"]
-            imagen=informacion["imagen"]
+            
 
-            entrada= Entrada(titulo=titulo,subtitulo=subtitulo,cuerpo=cuerpo,autor=autor,fecha=fecha,imagen=imagen)
+            entrada= Entrada(titulo=titulo,subtitulo=subtitulo,cuerpo=cuerpo,autor=autor,fecha=fecha)
             entrada.save()
             entradas=Entrada.objects.all()
             return render (request, "index.html", {"entradas":entradas,"mensaje": "Entrada creada correctamente!", "imagen":obtenerAvatar(request)})
     else:
 
-        form=EntradaForm(initial={entrada.autor:request.user})
+        form=EntradaForm(initial={"autor":request.user})
         return render (request, "addEntrada.html", {"form":form, "imagen":obtenerAvatar(request)})
 
 
 def leerEntradas(request):
     entradas=Entrada.objects.all()
-    #print(entradas)
+    
     return render(request, "leerEditEntrada.html", {"entradas":entradas,"titulo":"Entradas disponibles","imagen":obtenerAvatar(request)})
 
 
@@ -112,10 +112,7 @@ def editEntrada(request,id):
     
     if request.method=="POST":
         form=EntradaForm(request.POST)
-        #print(request.POST)
-        print(EntradaForm())
-        print(form)
-        print("estoy en el post")
+
         if form.is_valid():
             print("estoy en el post y soy valido")
             info=form.cleaned_data
@@ -126,23 +123,60 @@ def editEntrada(request,id):
             entrada.read_time=info["read_time"]
             entrada.autor=info["autor"]
             entrada.fecha=info["fecha"]
-            #entrada.imagen=info["imagen"]
+            
             entrada.save()
             entradas=Entrada.objects.all()
             return render(request, "index.html", {"entradas":entradas,"mensaje":"Entrada editado correctamente","titulo":"BloGastro","imagen":obtenerAvatar(request)})
         else:
-            print("estoy en el post y no soy valido")
+            
             return render(request, "editEntrada.html", {"form":form, "mensaje":"Error al editar la entrada"})
     else:
         
         form=EntradaForm(initial={"titulo":entrada.titulo,"subtitulo":entrada.subtitulo,"cuerpo":entrada.cuerpo,"resume":entrada.resume,"read_time":entrada.read_time,"autor":entrada.autor,
         "fecha":entrada.fecha})
-        print("estoy en el get")
+
         
         return render(request, "editEntrada.html", {"form":form,"imagen":obtenerAvatar(request),"entrada":entrada})
 
 
 def about(request):
-    #entrada=Entrada.objects.get(id=id)
-    
+      
     return render(request, "about.html",{"imagen":obtenerAvatar(request)})     
+
+def enviarMensaje(request):
+
+    if request.method=="POST":
+        form=MensajeForm(request.POST)
+        if form.is_valid():
+            informacion=form.cleaned_data
+
+            emisor=informacion["emisor"]
+            receptor=informacion["receptor"]
+            cuerpo=informacion["cuerpo"]
+            #leido=informacion["leido"]
+                       
+
+            mensaje= Mensaje(emisor=emisor,receptor=receptor,cuerpo=cuerpo,leido=False)
+            mensaje.save()
+            entradas=Entrada.objects.all()
+            return render (request, "index.html", {"entradas":entradas,"mensaje": "Mensaje enviado correctamente!", "imagen":obtenerAvatar(request)})
+    else:
+
+        form=MensajeForm(initial={"emisor":request.user})
+        return render (request, "enviarMensaje.html", {"form":form, "imagen":obtenerAvatar(request)})    
+    
+
+def leerMensajes(request):
+
+    mensajes=Mensaje.objects.filter(receptor__icontains=request.user)
+
+    if len(mensajes)!=0:
+        msj=mensajes[0].receptor
+        return render (request, "leerMensaje.html", {"form":mensajes, "imagen":obtenerAvatar(request)})      
+        
+    else:
+        msj="/media/avatares/avatarpordefecto.png"
+        print(msj)
+   
+
+    #return render (request, "leerMensaje.html", {"form":mensajes, "imagen":obtenerAvatar(request)}) 

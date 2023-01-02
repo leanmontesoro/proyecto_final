@@ -11,11 +11,11 @@ class UserEditForm(UserCreationForm):
     first_name=forms.CharField(label='Nombre')
     last_name=forms.CharField(label='Apellido')
     web=forms.URLField(label='Web',widget=forms.TextInput(attrs={'placeholder': 'https://www.example.com'}))
-    image=forms.ImageField()
+    #image=forms.ImageField()
 
     class Meta:
         model = User
-        fields = [ 'email', 'password1', 'password2', 'first_name', 'last_name','web','image']
+        fields = [ 'email', 'password1', 'password2', 'first_name', 'last_name','web']
         help_texts = {k:"" for k in fields} 
 
 
