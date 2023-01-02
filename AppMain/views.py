@@ -155,7 +155,6 @@ def editEntrada(request,id):
         
         return render(request, "editEntrada.html", {"form":form,"imagen":obtenerAvatar(request),"entrada":entrada})
 
-
 def about(request):
     #entrada=Entrada.objects.get(id=id)
     
