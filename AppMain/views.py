@@ -1,6 +1,5 @@
 from django.shortcuts import render
-from django.contrib.auth.mixins import LoginRequiredMixin #para vistas basadas en clases CLASS
-from django.contrib.auth.decorators import login_required #para vistas basadas en funciones DEF 
+from django.contrib.auth.decorators import login_required 
 from AppMain.models import Avatar,Entrada,Mensaje
 from AppMain.forms import AvatarForm,EntradaForm,MensajeForm
 
@@ -39,7 +38,7 @@ def agregarAvatar(request):
         form=AvatarForm()
         return render(request , "addAvatar.html", {"form": form, "usuario": request.user,"imagen":obtenerAvatar(request)})
 
-
+@login_required
 def addEntrada(request):
 
     if request.method=="POST":
@@ -72,7 +71,7 @@ def leerEntradas(request):
     return render(request, "leerEditEntrada.html", {"entradas":entradas,"titulo":"Entradas disponibles","imagen":obtenerAvatar(request)})
 
 
-
+@login_required
 def deleteEntradas(request, id):
     entrada=Entrada.objects.get(id=id)
     entrada.delete()
@@ -80,12 +79,13 @@ def deleteEntradas(request, id):
     
     return render(request, "deleteEntrada.html", {"entradas":entradas,"titulo":"Eliminar entradas","imagen":obtenerAvatar(request)})
 
+@login_required
 def detailEntrada(request,id):
     entrada=Entrada.objects.get(id=id)
     
     return render(request, "detailEntrada.html", {"entrada":entrada,"titulo":"BloGastro","imagen":obtenerAvatar(request)}) 
 
-
+@login_required
 def homeDeleteEntradas(request):
     
     if request.user.is_superuser > 0:
@@ -95,7 +95,7 @@ def homeDeleteEntradas(request):
 
     return render(request, "deleteEntrada.html", {"entradas":entradas,"titulo":"Eliminar entradas","imagen":obtenerAvatar(request)})
 
-
+@login_required
 def homeEditEntradas(request):
     
     if request.user.is_superuser > 0:
@@ -108,7 +108,7 @@ def homeEditEntradas(request):
 
 
 
-#TODO: @login_required
+@login_required
 def editEntrada(request,id):
     entrada=Entrada.objects.get(id=id)
     
@@ -140,11 +140,12 @@ def editEntrada(request,id):
         
         return render(request, "editEntrada.html", {"form":form,"imagen":obtenerAvatar(request),"entrada":entrada})
 
-
+@login_required
 def about(request):
       
     return render(request, "about.html",{"imagen":obtenerAvatar(request)})     
 
+@login_required
 def enviarMensaje(request):
 
     if request.method=="POST":
@@ -167,7 +168,7 @@ def enviarMensaje(request):
         form=MensajeForm(initial={"emisor":request.user})
         return render (request, "enviarMensaje.html", {"form":form, "imagen":obtenerAvatar(request)})    
     
-
+@login_required
 def leerMensajes(request):
 
     mensajes=Mensaje.objects.filter(receptor__icontains=request.user)

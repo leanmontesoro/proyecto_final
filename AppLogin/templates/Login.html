@@ -38,24 +38,31 @@
 			<li class="nav-item active">
 			<a class="nav-link" href="{% url 'inicio' %}">Home <span class="sr-only">(current)</span></a>
 			</li>
+
 			<li class="nav-item">
-			<a class="nav-link" href="post.html">Post</a>
+			<a class="nav-link" href="{% url 'about' %}">About me</a>
 			</li>
-			<li class="nav-item">
-			<a class="nav-link" href="author.html">Author</a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link" href="{% url 'register' %} ">SignUP</a>
-				</li>
+
 			{% if user.is_authenticated %}				
 			<li class="nav-item">
 				<a class="nav-link" href="{% url 'logout' %} ">Logout</a>
-				<p>{{ imagen }} {{ user.username }}</p>
-				</li>				
+				
+				</li>
+				{% block useravatar %}
+			<!-- <li class="nav-item">							
+				<img src="{{ imagen }}" class="img" alt="">
+				<p> {{ user.username }}</p>
+			</li> -->
+				{% endblock %}
 			{% else %}
 			<li class="nav-item">
 				<a class="nav-link" href="{% url 'login' %} ">Login</a>
 				</li>
+				
+				<li class="nav-item">
+					<a class="nav-link" href="{% url 'register' %} ">SignUP</a>
+					</li>
+		
 			{% endif %}
 		</ul>
 		<!-- End Menu -->
@@ -67,6 +74,7 @@
 		<!-- End Search -->
 	</div>
 </div>
+
 </nav>
 <!-- End Nav
 ================================================== -->
