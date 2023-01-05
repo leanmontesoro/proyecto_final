@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'AppProfile',
     'AppsignUp',
     'AppMain',
+    'AppMensajeria',
     
 ]
 
