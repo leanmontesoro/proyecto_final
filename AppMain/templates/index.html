@@ -5,7 +5,7 @@
 {% block useravatar %}
 <li class="nav-item">							
 	<a href= "{% url 'editProfile' %}"> 
-	<img src= "{{ imagen }}" class="img" alt="">
+	<img src= "{{ avatar }}" class="img" alt="">
 	</a>
 	<a href="{% url 'editProfile' %}"> 
 		<p> {{ user.username }} </p> 

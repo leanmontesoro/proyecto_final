@@ -18,7 +18,7 @@ class Entrada(models.Model):
     cuerpo=models.CharField(max_length=5000)
     autor=models.CharField(max_length=50)
     fecha=models.DateField()
-    imagen=models.ImageField(upload_to='avatares')
+    imagen=models.ImageField(upload_to='media', blank=True) #avatares?
     
     def __str__(self):
         return self.titulo+" "+self.subtitulo

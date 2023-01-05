@@ -37,8 +37,8 @@
 </button>
 <div class="container">
 	<!-- Begin Logo -->
-	<a class="navbar-brand" href="index.html">
-	<img src="{% static 'assets/img/logo.png' %}" alt="logo">
+	<a class="navbar-brand" href="{% url 'inicio' %}">
+	<img src="{% static 'assets/img/logo3.jpg' %}" alt="logo">
 	</a>
 	<!-- End Logo -->
 	<div class="collapse navbar-collapse" id="navbarsExampleDefault">
@@ -60,7 +60,7 @@
 			
 			<li class="nav-item">							
 				<a href= "{% url 'editProfile' %}"> 
-				<img src= "{{ imagen }}" class="img" alt="">
+				<img src= "{{ avatar }}" class="img" alt="">
 				</a>
 				<a href="{% url 'editProfile' %}"> 
 					<p> {{ user.username }} </p> 

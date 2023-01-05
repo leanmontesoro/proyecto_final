@@ -1,22 +1,12 @@
-# BloGastro - Leandro Montesoro
+# BloGastro - Issue
 
-Trabajé de manera individual en la creacion de un blog referido  a la gastronomía.
-En la rama principal del repo se encuentra el archivo .mp4 con el video del funcionamiento. "BloGastro.mp4"
+Se genera un error de integridad en la BD al actualizar por segunda vez el usuario. Detecté que el error lo tira en la linea 63 de proyecto_final\AppProfile\views.py cuando hace el .save() de la info, y en base a post's que fui leyendo es como si quisiese volver a generar un usuario que ya existe y pincha, creo que la mano viene que por la PK del model User.
 
-URL's relevantes para la navegacion:
-* inicio/: Home del blog
-* signup/: Formulario para registración
-* login/: Formulario para Login
-* editProfile/: Edición del perfil del usuario logueado. Se puede utilizar directamente o bien clickeando el username o avatar (margen sup derecho) se accede.
-* enviarMensaje/: Formulario para envio de mensaje
-* leerMensajes/: Repositorio de mensajes del usuario 
-* editEntrada/<id>: Utilizado para editar una entrada
-* agregarAvatar/: Formulario para subir un avatar
-* agregarEntrada/: Formulario para agregar una entrada al blog
-!!!!!!!!!!!* leerEntradas/: Utilizado para listar las entradas
-* detailEntrada/<id>: Utilizado para seleccionar la entrada a mostrar en detalle
-* homeDeleteEntradas/: Formulario para listar las entradas a eliminar por el usuario. Filtra las entradas propias.
-* deleteEntradas/<id>: Utilizado para eliminar la entrada con el id indicado.
-* homeEditEntradas/: Listado de entradas disponibles para editar. Solamente lista las entradas cuyo autor sea el user logeado
-* about/: Info sobre el creado de la web.
+Para repoducir el issue seguir los siguientes pasos:
+* Darse de alta desde el boton SignUp (Margen sup derecho)
+* Con el alta dada, el login se hace automaticamente.
+* Ingresar desde la URL a http://127.0.0.1:8000/editUser/
+* Cargar los datos y aceptar el formulario
+* Volver a ingresar a http://127.0.0.1:8000/editUser/ e intentar cargar datos distintos. Aceptar el form y allí ocurre el error
+
 

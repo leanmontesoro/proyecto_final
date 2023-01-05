@@ -2,16 +2,8 @@ from django.shortcuts import render
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth import login, authenticate
 from AppMain.models import Avatar,Entrada
+from AppProfile.views import obtenerAvatar
 
-
-
-def obtenerAvatar(request):
-    lista=Avatar.objects.filter(user=request.user)
-    if len(lista)!=0:
-        imagen=lista[0].imagen.url
-    else:
-        imagen="/media/avatarpordefecto3.png"
-    return imagen
 
 def login_req(request):
     if request.method == "POST":
@@ -25,7 +17,7 @@ def login_req(request):
             if usuario is not None:    
                 login(request, usuario)
                 entradas=Entrada.objects.all()
-                return render(request, 'index.html', {"entradas":entradas,'mensaje':f"Bienvenido {usuario}",'titulo':"CookAlgo",'descripcion':"","imagen":obtenerAvatar(request)} )
+                return render(request, 'index.html', {"entradas":entradas,'mensaje':f"Bienvenido {usuario}",'titulo':"BloGastro",'descripcion':"","avatar":obtenerAvatar(request)} )
             else:
                 return render(request, 'login.html', {'mensaje':"Usuario o contraseña incorrectos", 'form':form})
 

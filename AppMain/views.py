@@ -2,41 +2,15 @@ from django.shortcuts import render
 from django.contrib.auth.decorators import login_required 
 from AppMain.models import Avatar,Entrada,Mensaje
 from AppMain.forms import AvatarForm,EntradaForm,MensajeForm
+from AppProfile.views import obtenerAvatar
 
-
-
-def obtenerAvatar(request):
-    lista=Avatar.objects.filter(user=request.user)
-    if len(lista)!=0:
-        imagen=lista[0].imagen.url
-    else:
-        imagen="/media/avatarpordefecto3.png"
-    return imagen
-    
+   
 
 def inicio(request):
     entradas=Entrada.objects.all()
-    return render (request, "index.html",{"entradas":entradas,"titulo":"BloGastro","descripcion":"Un blog para el buen comer",})
-    
+    return render (request, "index.html",{"entradas":entradas,"titulo":"BloGastro","descripcion":"Un blog para el buen comer","avatar":obtenerAvatar(request)})
     
 
-
-@login_required
-def agregarAvatar(request):
-    if request.method=="POST":
-        form=AvatarForm(request.POST, request.FILES)
-        if form.is_valid():
-            avatarViejo=Avatar.objects.filter(user=request.user)
-            if len(avatarViejo)!=0:
-                avatarViejo[0].delete()
-            avatar=Avatar(user=request.user, imagen=request.FILES["imagen"])
-            avatar.save()
-            return render(request, "index.html", {"mensaje":"Avatar agregado correctamente","imagen":obtenerAvatar(request)})
-        else:
-            return render(request, "addAvatar.html", {"form": form, "usuario": request.user})
-    else:
-        form=AvatarForm()
-        return render(request , "addAvatar.html", {"form": form, "usuario": request.user,"imagen":obtenerAvatar(request)})
 
 @login_required
 def addEntrada(request):
@@ -58,17 +32,17 @@ def addEntrada(request):
             entrada= Entrada(titulo=titulo,subtitulo=subtitulo,cuerpo=cuerpo,autor=autor,fecha=fecha,resume=resume,read_time=read_time)
             entrada.save()
             entradas=Entrada.objects.all()
-            return render (request, "index.html", {"entradas":entradas,"mensaje": "Entrada creada correctamente!", "imagen":obtenerAvatar(request)})
+            return render (request, "index.html", {"entradas":entradas,"mensaje": "Entrada creada correctamente!", "avatar":obtenerAvatar(request)})
     else:
 
         form=EntradaForm(initial={"autor":request.user})
-        return render (request, "addEntrada.html", {"form":form, "imagen":obtenerAvatar(request)})
+        return render (request, "addEntrada.html", {"form":form, "avatar":obtenerAvatar(request)})
 
 
 def leerEntradas(request):
     entradas=Entrada.objects.all()
     
-    return render(request, "leerEditEntrada.html", {"entradas":entradas,"titulo":"Entradas disponibles","imagen":obtenerAvatar(request)})
+    return render(request, "leerEditEntrada.html", {"entradas":entradas,"titulo":"Entradas disponibles","avatar":obtenerAvatar(request)})
 
 
 @login_required
@@ -77,13 +51,13 @@ def deleteEntradas(request, id):
     entrada.delete()
     entradas=Entrada.objects.all()
     
-    return render(request, "deleteEntrada.html", {"entradas":entradas,"titulo":"Eliminar entradas","imagen":obtenerAvatar(request)})
+    return render(request, "deleteEntrada.html", {"entradas":entradas,"titulo":"Eliminar entradas","avatar":obtenerAvatar(request)})
 
 @login_required
 def detailEntrada(request,id):
     entrada=Entrada.objects.get(id=id)
     
-    return render(request, "detailEntrada.html", {"entrada":entrada,"titulo":"BloGastro","imagen":obtenerAvatar(request)}) 
+    return render(request, "detailEntrada.html", {"entrada":entrada,"titulo":"BloGastro","avatar":obtenerAvatar(request)}) 
 
 @login_required
 def homeDeleteEntradas(request):
@@ -93,7 +67,7 @@ def homeDeleteEntradas(request):
     else:
         entradas=Entrada.objects.filter(autor=request.user)
 
-    return render(request, "deleteEntrada.html", {"entradas":entradas,"titulo":"Eliminar entradas","imagen":obtenerAvatar(request)})
+    return render(request, "deleteEntrada.html", {"entradas":entradas,"titulo":"Eliminar entradas","avatar":obtenerAvatar(request)})
 
 @login_required
 def homeEditEntradas(request):
@@ -103,7 +77,7 @@ def homeEditEntradas(request):
     else:
         entradas=Entrada.objects.filter(autor=request.user)
 
-    return render(request, "leerEditEntrada.html", {"entradas":entradas,"titulo":"Editar entradas","imagen":obtenerAvatar(request)})
+    return render(request, "leerEditEntrada.html", {"entradas":entradas,"titulo":"Editar entradas","avatar":obtenerAvatar(request)})
 
 
 
@@ -112,11 +86,12 @@ def homeEditEntradas(request):
 def editEntrada(request,id):
     entrada=Entrada.objects.get(id=id)
     
+
     if request.method=="POST":
         form=EntradaForm(request.POST)
 
         if form.is_valid():
-            print("estoy en el post y soy valido")
+            
             info=form.cleaned_data
             entrada.titulo=info["titulo"]
             entrada.subtitulo=info["subtitulo"]
@@ -128,7 +103,7 @@ def editEntrada(request,id):
             
             entrada.save()
             entradas=Entrada.objects.all()
-            return render(request, "index.html", {"entradas":entradas,"mensaje":"Entrada editado correctamente","titulo":"BloGastro","imagen":obtenerAvatar(request)})
+            return render(request, "index.html", {"entradas":entradas,"mensaje":"Entrada editado correctamente","titulo":"BloGastro","avatar":obtenerAvatar(request)})
         else:
             
             return render(request, "editEntrada.html", {"form":form, "mensaje":"Error al editar la entrada"})
@@ -138,12 +113,12 @@ def editEntrada(request,id):
         "fecha":entrada.fecha})
 
         
-        return render(request, "editEntrada.html", {"form":form,"imagen":obtenerAvatar(request),"entrada":entrada})
+        return render(request, "editEntrada.html", {"form":form,"avatar":obtenerAvatar(request),"entrada":entrada})
 
 @login_required
 def about(request):
       
-    return render(request, "about.html",{"imagen":obtenerAvatar(request)})     
+    return render(request, "about.html",{"avatar":obtenerAvatar(request)})     
 
 @login_required
 def enviarMensaje(request):
@@ -162,11 +137,11 @@ def enviarMensaje(request):
             mensaje= Mensaje(emisor=emisor,receptor=receptor,cuerpo=cuerpo,leido=False)
             mensaje.save()
             entradas=Entrada.objects.all()
-            return render (request, "index.html", {"entradas":entradas,"mensaje": "Mensaje enviado correctamente!", "imagen":obtenerAvatar(request)})
+            return render (request, "index.html", {"entradas":entradas,"mensaje": "Mensaje enviado correctamente!", "avatar":obtenerAvatar(request)})
     else:
 
         form=MensajeForm(initial={"emisor":request.user})
-        return render (request, "enviarMensaje.html", {"form":form, "imagen":obtenerAvatar(request)})    
+        return render (request, "enviarMensaje.html", {"form":form, "avatar":obtenerAvatar(request)})    
     
 @login_required
 def leerMensajes(request):
@@ -175,7 +150,7 @@ def leerMensajes(request):
 
     if len(mensajes)!=0:
         msj=mensajes[0].receptor
-        return render (request, "leerMensaje.html", {"form":mensajes, "imagen":obtenerAvatar(request)})      
+        return render (request, "leerMensaje.html", {"form":mensajes, "avatar":obtenerAvatar(request)})      
         
     else:
         msj="/media/avatares/avatarpordefecto.png"
