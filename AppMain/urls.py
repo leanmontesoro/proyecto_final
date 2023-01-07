@@ -1,5 +1,5 @@
 from django.urls import path
-from AppMain.views import inicio,addEntrada,leerEntradas,deleteEntradas,homeDeleteEntradas,detailEntrada,about,editEntrada,homeEditEntradas,enviarMensaje,leerMensajes
+from AppMain.views import inicio,addEntrada,leerEntradas,deleteEntradas,homeDeleteEntradas,detailEntrada,about,editEntrada,homeEditEntradas
 from AppLogin.views import login_req
 from AppsignUp.views import register
 from AppProfile.views import editarPerfil, editarUsuario
@@ -14,10 +14,7 @@ urlpatterns = [
     
     
     path("editEntrada/<id>", editEntrada, name="editEntrada"),
-    
-    path("enviarMensaje/", enviarMensaje, name="enviarMensaje"),
-    path("leerMensajes/", leerMensajes, name="leerMensajes"),
-    
+      
     
     path("agregarEntrada/", addEntrada, name="agregarEntrada"),
     path("leerEntradas/", leerEntradas, name="leerEntradas"),

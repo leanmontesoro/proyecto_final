@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required 
-from AppMain.models import Avatar,Entrada,Mensaje
-from AppMain.forms import AvatarForm,EntradaForm,MensajeForm
+from AppMain.models import Avatar,Entrada
+from AppMain.forms import AvatarForm,EntradaForm
 from AppProfile.views import obtenerAvatar
 
    
@@ -35,7 +35,8 @@ def addEntrada(request):
             return render (request, "index.html", {"entradas":entradas,"mensaje": "Entrada creada correctamente!", "avatar":obtenerAvatar(request)})
     else:
 
-        form=EntradaForm(initial={"autor":request.user})
+        #form=EntradaForm(initial={"autor":request.user})
+        form=EntradaForm()
         return render (request, "addEntrada.html", {"form":form, "avatar":obtenerAvatar(request)})
 
 

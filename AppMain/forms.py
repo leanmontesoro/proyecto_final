@@ -15,12 +15,7 @@ class EntradaForm(ModelForm):
         
     class Meta:
         model = Entrada
-        fields = ['titulo', 'subtitulo', 'cuerpo','resume','read_time','autor','fecha', 'imagen']
+        fields = ['titulo', 'subtitulo', 'cuerpo','resume','read_time']
+        
+        
 
-
-
-class MensajeForm(forms.Form):
-    emisor=forms.CharField(max_length=50)
-    receptor=forms.CharField(max_length=50)
-    cuerpo=forms.CharField(max_length=5000)
-    #leido=forms.BooleanField()
