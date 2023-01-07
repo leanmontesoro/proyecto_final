@@ -37,7 +37,18 @@ def formMensajes(request):
         return render(request, 'formMensajes.html', {"form": formulario, "avatar": obtenerAvatar(request)} )
 
 def inboxMensajes(request):
-    pass
+    usuario = request.user
+    print(usuario.id)
+    inbox = Mensaje.objects.filter(recibir_id = usuario.id)
+    print(inbox)
+    for mensaje in inbox:
+        mensaje.leido = True
+        mensaje.save()  
+    return render(request, "inboxMensajes.html", {"mensajes": inbox, "avatar": obtenerAvatar(request)})
 
+
+@login_required
 def outboxMensajes(request):
-    pass
+    usuario = request.user
+    outbox = Mensaje.objects.filter(enviar = usuario)
+    return render(request, "outboxMensajes.html", {"mensajes": outbox, "avatar": obtenerAvatar(request)})

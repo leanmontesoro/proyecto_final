@@ -56,9 +56,13 @@
 			<li class="nav-item">
 				<a class="nav-link" href="{% url 'register' %} ">SignUP</a>
 				</li>
-			{% if user.is_authenticated %}				
+			{% if user.is_authenticated %}
+			<li class="nav-item">
+				<a class="nav-link" href="{% url 'logout' %} ">Logout</a>
+				
+				</li>					
 			<li class="nav-item">							
-				<img src= "{{ imagen }}" class="img" alt="">
+				<img src= "{{ avatar }}" class="img" alt="">
 				<p> {{ user.username }} </p>
 			</li>			
 			{% else %}
@@ -85,7 +89,7 @@
 <div class="container">
 	<div class="mainheading">
 		<!-- TODO: bloque variable -->
-		<h1 class="sitetitle">Agregar entrada al blog</h1>
+		<h1 class="sitetitle">Outbox</h1>
 		<p class="lead">
 			 
 		</p>
@@ -110,15 +114,15 @@
 						<tr>
 							<th style="border: 1px solid #000; width: 25%; padding: 0.3em;">Para:       </th>
 							<th style="border: 1px solid #000; width: 25%; padding: 0.3em;">Mensajes:   </th>
-							<th style="border: 1px solid #000; width: 25%; padding: 0.3em;">hora        </th>
-							<th style="border: 1px solid #000; width: 25%; padding: 0.3em;">leido       </th>
+							<th style="border: 1px solid #000; width: 25%; padding: 0.3em;">Hora:        </th>
+							<th style="border: 1px solid #000; width: 25%; padding: 0.3em;">Leído:       </th>
 						</tr>
-						{% for indice in mensajes %}
+						{% for m in mensajes %}
 						<tr>
-							<td style="text-align: center; border: 1px solid #000; width: 25%; border-spacing: 0; padding: 0.3em;">{{ indice.recibir }}</td>
-							<td style="text-align: center; border: 1px solid #000; width: 25%; border-spacing: 0; padding: 0.3em;">{{ indice.mensaje }}</td>
-							<td style="text-align: center; border: 1px solid #000; width: 25%; border-spacing: 0; padding: 0.3em;">{{ indice.a_quehora }}</td>
-							<td style="text-align: center; border: 1px solid #000; width: 25%; border-spacing: 0; padding: 0.3em;">{{ indice.leido }}</td>
+							<td style="text-align: center; border: 1px solid #000; width: 25%; border-spacing: 0; padding: 0.3em;">{{ m.recibir }}</td>
+							<td style="text-align: center; border: 1px solid #000; width: 25%; border-spacing: 0; padding: 0.3em;">{{ m.mensaje }}</td>
+							<td style="text-align: center; border: 1px solid #000; width: 25%; border-spacing: 0; padding: 0.3em;">{{ m.hora }}</td>
+							<td style="text-align: center; border: 1px solid #000; width: 25%; border-spacing: 0; padding: 0.3em;">{{ m.leido }}</td>
 						</tr>   
 						{% endfor %}
 					</table>

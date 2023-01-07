@@ -9,8 +9,10 @@ urlpatterns = [
     #path("mensajeFormulario", mensajeFormulario , name = "mensajeFormulario"),
     path("formMensajes", formMensajes , name = "formMensajes"),
     
+
     path("homeMensajes", homeMensajes , name = "homeMensajes"),
     #path("mensajeUsuarios", mensajeUsuarios , name = "mensajeUsuarios"),
+
 
     #path("leerMensaje", leerMensaje , name = "leerMensaje"),
     path("inboxMensajes", inboxMensajes , name = "inboxMensajes"),
