@@ -14,10 +14,10 @@ urlpatterns = [
     
     
     path("editEntrada/<id>", editEntrada, name="editEntrada"),
-      
+    path("leerEntradas/", leerEntradas, name="leerEntradas"),  
     
     path("agregarEntrada/", addEntrada, name="agregarEntrada"),
-    path("leerEntradas/", leerEntradas, name="leerEntradas"),
+    
     path("detailEntrada/<id>", detailEntrada, name="detailEntrada"),
     
     path("homeDeleteEntradas/", homeDeleteEntradas, name="homeDeleteEntradas"),

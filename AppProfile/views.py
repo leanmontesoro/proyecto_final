@@ -55,11 +55,9 @@ def editarUsuario(request):
     if request.method == "POST":
         edit_form = UserEditForm(request.POST)
         user_viejos = User.objects.filter(username = request.user)
-        print(user_viejos)
-        print("soy post")
+
         if edit_form.is_valid():
-            print("soy valido")
-            print(edit_form)
+
             edit_form.save()
             return render(request, "index.html", {"mensaje": f"El usuario {request.user} ha sido editado exitosamente!", "imagen": obtenerAvatar(request)})
 

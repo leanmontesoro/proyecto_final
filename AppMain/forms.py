@@ -15,7 +15,7 @@ class EntradaForm(ModelForm):
         
     class Meta:
         model = Entrada
-        fields = ['titulo', 'subtitulo', 'cuerpo','resume','read_time']
+        fields = ['titulo', 'subtitulo', 'cuerpo','resume','read_time','autor','fecha', 'imagen']
         
         
 
