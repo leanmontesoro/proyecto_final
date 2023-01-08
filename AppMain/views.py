@@ -102,10 +102,6 @@ def editEntrada(request,id):
             entrada.titulo=info["titulo"]
             entrada.subtitulo=info["subtitulo"]
             entrada.cuerpo=info["cuerpo"]
-            entrada.resume=info["resume"]
-            entrada.read_time=info["read_time"]
-            entrada.autor=info["autor"]
-            entrada.fecha=info["fecha"]
             # Tratamiento de la imagen
             status_imagen=info["imagen"]
             if str(type(status_imagen)) == "<class 'NoneType'>":      

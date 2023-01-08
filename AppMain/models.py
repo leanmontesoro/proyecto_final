@@ -18,7 +18,7 @@ class Entrada(models.Model):
     cuerpo= RichTextUploadingField() # CKEditor Rich Text Field
     autor=models.CharField(max_length=50)
     fecha=models.DateField()
-    imagen=models.ImageField(upload_to='media', blank=True) #avatares?
+    imagen=models.ImageField(upload_to='media', blank=True)
     
     def __str__(self):
         return self.titulo+" "+self.subtitulo

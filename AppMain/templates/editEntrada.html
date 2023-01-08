@@ -30,17 +30,18 @@
 	</div>
 	{% endblock %}
 
-	{% block entradas %}
+	{% block body %}
 	<form action="{% url 'editEntrada' entrada.id %}" method="POST" enctype="multipart/form-data"> {% csrf_token %}
 
 		<table>
 			
-			{{ form.as_table }}
+			{{ form.as_table | safe }}
+			{{ form.media | safe }}
 				
 		</table>
-				
+		<div class="form-group">		
 		<input type="submit" value="Editar Entrada">
-				
+		</div>
 				
 		</form>
 		{% endblock %}
