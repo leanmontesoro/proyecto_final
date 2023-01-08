@@ -61,7 +61,7 @@ def deleteEntradas(request, id):
 @login_required
 def detailEntrada(request,id):
     entrada=Entrada.objects.get(id=id)
-    
+    print(entrada.imagen.url)
     return render(request, "detailEntrada.html", {"entrada":entrada,"titulo":"BloGastro","avatar":obtenerAvatar(request)}) 
 
 @login_required
