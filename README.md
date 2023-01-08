@@ -1,10 +1,19 @@
 # BloGastro - Leandro Montesoro
 
+- [BloGastro - Leandro Montesoro](#blogastro---leandro-montesoro)
+    - [**El blog se compone de las siguientes App's**](#el-blog-se-compone-de-las-siguientes-apps)
+    - [**URL's relevantes para la navegacion:**](#urls-relevantes-para-la-navegacion)
+    - [Rúbricas](#rúbricas)
+    - [Rúbricas navegacion](#rúbricas-navegacion)
+
+
+***
+
 Trabajé de manera individual en la creacion de un blog referido a la gastronomía. Utilicé Django y python.
 
 ***
 
-### **El blog se compone de las siguientes App's:**
+### **El blog se compone de las siguientes App's**
 
 - **AppLogin:** Aquí se desarrolló el modulo de login.
 - **AppMain:** Aquí se encuentra el html padre del cual heredan los templates de toda la aplicación "padre.html". Se mantiene la navbar con el avatar, el logout, y la posibilidad de acceder a la edición del perfil desde un hypervinculo sobre el avatar/nombre de usuario. Además se respeta el footer que también queda estatico. Además se encuentran distintas funcionalidades:
@@ -45,7 +54,7 @@ Trabajé de manera individual en la creacion de un blog referido a la gastronom�
 * *Para crear, editar o borrar las fotos debes estar registrado como Administrador.*: Solo el ADM o el dueño de la entrada puede editar una entrada / imagen. Existen validaciones utilizando la funcion is_superuser()
 * *Cada blog, es decir cada model Blog debe tener como mínimo, un título, subtítulo, cuerpo, autor, fecha y una imagen (mínimo y obligatorio, puede tener más).*: Se encuentra en el models.py, llamado "Entrada" de la AppMain.
 
-### Rúbricas navegacion:
+### Rúbricas navegacion
 * *Login:* Para las acciones de edicion, agregar entradas o borrar se implementó el @login_required.
 * *Visualizar el home del blog.*: Desde la url "/"
 * *Poder listar todas las páginas del blog, poder ver en detalle cada una, poder crear, editar o borrar páginas del blog*: 
