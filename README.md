@@ -3,8 +3,8 @@
 - [BloGastro - Leandro Montesoro](#blogastro---leandro-montesoro)
     - [**El blog se compone de las siguientes App's**](#el-blog-se-compone-de-las-siguientes-apps)
     - [**URL's relevantes para la navegacion:**](#urls-relevantes-para-la-navegacion)
-    - [Rúbricas](#rúbricas)
-    - [Rúbricas navegacion](#rúbricas-navegacion)
+    - [**Rúbricas**](#rúbricas)
+    - [**Rúbricas navegacion**](#rúbricas-navegacion)
 
 
 ***
@@ -47,14 +47,14 @@ Trabajé de manera individual en la creacion de un blog referido a la gastronom�
 
 ***
 
-### Rúbricas
+### **Rúbricas**
 * *Contar con algún acceso visible a la vista de "Acerca de mí" donde se contará acerca de los dueños de la página manejada en el route about/.* :  Se accede desde la url /about
 * *Contar con algún acceso visible a la vista de blogs que debe alojarse en el route pages/:* Desde el home de la web se pueden visualizar todas las entradas
 * *Acceder a una pantalla que contendrá las páginas. Al clickear en “Leer más” debe navegar al detalle de la page mediante un route pages/<pageId>*: Clickeando en la imagen o en el titulo de una entrada se puede acceder al detalle de la misma, o bien con la url editEntrada/<id>
 * *Para crear, editar o borrar las fotos debes estar registrado como Administrador.*: Solo el ADM o el dueño de la entrada puede editar una entrada / imagen. Existen validaciones utilizando la funcion is_superuser()
 * *Cada blog, es decir cada model Blog debe tener como mínimo, un título, subtítulo, cuerpo, autor, fecha y una imagen (mínimo y obligatorio, puede tener más).*: Se encuentra en el models.py, llamado "Entrada" de la AppMain.
 
-### Rúbricas navegacion
+### **Rúbricas navegacion**
 * *Login:* Para las acciones de edicion, agregar entradas o borrar se implementó el @login_required.
 * *Visualizar el home del blog.*: Desde la url "/"
 * *Poder listar todas las páginas del blog, poder ver en detalle cada una, poder crear, editar o borrar páginas del blog*: 
