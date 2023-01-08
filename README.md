@@ -36,6 +36,8 @@ Trabajé de manera individual en la creacion de un blog referido a la gastronom�
 * signup/: Formulario para registración
 * login/: Formulario para Login
 * editProfile/: Edición del perfil del usuario logueado. Se puede utilizar directamente o bien clickeando el username o avatar (margen sup derecho) se accede.
+* editUser/: Edición de datos del usuario.
+* editPassword/: Edicion de password
 * enviarMensaje/: Formulario para envio de mensaje
 * editEntrada/<id>: Utilizado para editar una entrada
 * agregarEntrada/: Formulario para agregar una entrada al blog

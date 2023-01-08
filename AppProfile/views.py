@@ -1,8 +1,10 @@
 from django.shortcuts import render
 from AppProfile.forms import Perfil_Form, UserEditForm
+from django.contrib.auth import update_session_auth_hash
 from AppMain.models import Avatar,Entrada
 from AppProfile.models import Perfil
 from django.contrib.auth.models import User
+from django.contrib.auth.forms import  PasswordChangeForm
 # Create your views here.
 
 
@@ -69,4 +71,18 @@ def editarUsuario(request):
         print("soy GET")
         edit_form = UserEditForm(instance = request.user)
         return render(request, "editUser.html", {"form":edit_form, "mensaje":"Editar perfil", "avatar": obtenerAvatar(request)})
-        
+
+
+def editPassword(request):
+    entradas=Entrada.objects.all()
+    if request.method == "POST":
+        form = PasswordChangeForm(data = request.POST, user = request.user)
+        if form.is_valid():
+            form.save()
+            update_session_auth_hash(request, form.user)
+            return render(request, "index.html", {"mensaje": "La contraseña ha sido editada exitosamente!","entradas":entradas, "avatar": obtenerAvatar(request)})
+        else:
+           return render(request, "editPassword.html", {"form" : PasswordChangeForm(user = request.user),"entradas":entradas, "mensaje": "Ocurrió un error, intentelo nuevamente", "avatar": obtenerAvatar(request)})
+    else:
+        return render(request, "editPassword.html", {"form": PasswordChangeForm(user = request.user),"entradas":entradas, "avatar": obtenerAvatar(request)})
+       
