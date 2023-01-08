@@ -13,19 +13,13 @@ urlpatterns = [
     path('logout/', LogoutView.as_view(), name='logout'),
     
     
-    path("editEntrada/<id>", editEntrada, name="editEntrada"),
-    path("leerEntradas/", leerEntradas, name="leerEntradas"),  
-    
     path("agregarEntrada/", addEntrada, name="agregarEntrada"),
-    
     path("detailEntrada/<id>", detailEntrada, name="detailEntrada"),
-    
     path("homeDeleteEntradas/", homeDeleteEntradas, name="homeDeleteEntradas"),
     path("deleteEntradas/<id>", deleteEntradas, name="deleteEntradas"),
-    
     path("homeEditEntradas/", homeEditEntradas, name="homeEditEntradas"),
-
-    
+    path("editEntrada/<id>", editEntrada, name="editEntrada"),
+    path("leerEntradas/", leerEntradas, name="leerEntradas"), 
     
 
     path("editUser/", editarUsuario, name="editUser"),

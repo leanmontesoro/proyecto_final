@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required 
-from AppMain.models import Avatar,Entrada
-from AppMain.forms import AvatarForm,EntradaForm
+from AppMain.models import Entrada
+from AppMain.forms import EntradaForm
 from AppProfile.views import obtenerAvatar
 
    
@@ -119,42 +119,3 @@ def editEntrada(request,id):
 def about(request):
       
     return render(request, "about.html",{"avatar":obtenerAvatar(request)})     
-
-@login_required
-def enviarMensaje(request):
-
-    if request.method=="POST":
-        form=MensajeForm(request.POST)
-        if form.is_valid():
-            informacion=form.cleaned_data
-
-            emisor=informacion["emisor"]
-            receptor=informacion["receptor"]
-            cuerpo=informacion["cuerpo"]
-            #leido=informacion["leido"]
-                       
-
-            mensaje= Mensaje(emisor=emisor,receptor=receptor,cuerpo=cuerpo,leido=False)
-            mensaje.save()
-            entradas=Entrada.objects.all()
-            return render (request, "index.html", {"entradas":entradas,"mensaje": "Mensaje enviado correctamente!", "avatar":obtenerAvatar(request)})
-    else:
-
-        form=MensajeForm(initial={"emisor":request.user})
-        return render (request, "enviarMensaje.html", {"form":form, "avatar":obtenerAvatar(request)})    
-    
-@login_required
-def leerMensajes(request):
-
-    mensajes=Mensaje.objects.filter(receptor__icontains=request.user)
-
-    if len(mensajes)!=0:
-        msj=mensajes[0].receptor
-        return render (request, "leerMensaje.html", {"form":mensajes, "avatar":obtenerAvatar(request)})      
-        
-    else:
-        msj="/media/avatares/avatarpordefecto.png"
-        print(msj)
-   
-
-    #return render (request, "leerMensaje.html", {"form":mensajes, "imagen":obtenerAvatar(request)}) 
