@@ -56,19 +56,24 @@ def editarPerfil(request):
 def editarUsuario(request):
     if request.method == "POST":
         edit_form = UserEditForm(request.POST)
-        user_viejos = User.objects.filter(username = request.user)
+        user_actual = User.objects.get(username = request.user)
 
         if edit_form.is_valid():
+            informacion=edit_form.cleaned_data
 
-            edit_form.save()
-            return render(request, "index.html", {"mensaje": f"El usuario {request.user} ha sido editado exitosamente!", "imagen": obtenerAvatar(request)})
+            user_actual.email=informacion["email"]
+            user_actual.first_name=informacion["first_name"]
+            user_actual.last_name=informacion["last_name"]
+            user_actual.save()
+
+            return render(request, "index.html", {"mensaje": f"El usuario {request.user} ha sido editado exitosamente!", "avatar": obtenerAvatar(request)})
 
         else:
-            print("soy no soy valido")
-            return render(request, "editUser.html", {"form" : UserEditForm(instance = request.user), "mensaje_registro": "Intentelo Nuevamente, hubo un error", "avatar": obtenerAvatar(request)}) 
+            
+            return render(request, "editUser.html", {"form" : UserEditForm(instance = request.user), "mensaje": "Intentelo Nuevamente, hubo un error", "avatar": obtenerAvatar(request)}) 
 
     else:
-        print("soy GET")
+        
         edit_form = UserEditForm(instance = request.user)
         return render(request, "editUser.html", {"form":edit_form, "mensaje":"Editar perfil", "avatar": obtenerAvatar(request)})
 
