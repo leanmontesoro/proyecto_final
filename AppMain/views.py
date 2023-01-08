@@ -93,11 +93,12 @@ def editEntrada(request,id):
     
 
     if request.method=="POST":
-        form=EntradaForm(request.POST)
+        form=EntradaForm(request.POST, request.FILES)
 
         if form.is_valid():
             
             info=form.cleaned_data
+            
             entrada.titulo=info["titulo"]
             entrada.subtitulo=info["subtitulo"]
             entrada.cuerpo=info["cuerpo"]
@@ -105,7 +106,15 @@ def editEntrada(request,id):
             entrada.read_time=info["read_time"]
             entrada.autor=info["autor"]
             entrada.fecha=info["fecha"]
-            
+            # Tratamiento de la imagen
+            status_imagen=info["imagen"]
+            if str(type(status_imagen)) == "<class 'NoneType'>":      
+                    pass
+            elif str(status_imagen) == "False":                       
+                    entrada.imagen = None
+            else:                                                   
+                 entrada.imagen = info["imagen"]
+          
             entrada.save()
             entradas=Entrada.objects.all()
             return render(request, "index.html", {"entradas":entradas,"mensaje":"Entrada editado correctamente","titulo":"BloGastro","avatar":obtenerAvatar(request)})
@@ -115,7 +124,7 @@ def editEntrada(request,id):
     else:
         
         form=EntradaForm(initial={"titulo":entrada.titulo,"subtitulo":entrada.subtitulo,"cuerpo":entrada.cuerpo,"resume":entrada.resume,"read_time":entrada.read_time,"autor":entrada.autor,
-        "fecha":entrada.fecha})
+        "fecha":entrada.fecha,"imagen":entrada.imagen})
 
         
         return render(request, "editEntrada.html", {"form":form,"avatar":obtenerAvatar(request),"entrada":entrada})
