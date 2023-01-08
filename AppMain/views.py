@@ -27,9 +27,10 @@ def addEntrada(request):
             fecha=informacion["fecha"]
             resume=informacion["resume"]
             read_time=informacion["read_time"]
+            imagen=informacion["imagen"]
             
 
-            entrada= Entrada(titulo=titulo,subtitulo=subtitulo,cuerpo=cuerpo,autor=autor,fecha=fecha,resume=resume,read_time=read_time)
+            entrada= Entrada(titulo=titulo,subtitulo=subtitulo,cuerpo=cuerpo,autor=autor,fecha=fecha,resume=resume,read_time=read_time,imagen=imagen)
             entrada.save()
             entradas=Entrada.objects.all()
             return render (request, "index.html", {"entradas":entradas,"mensaje": "Entrada creada correctamente!", "avatar":obtenerAvatar(request)})
@@ -49,7 +50,11 @@ def leerEntradas(request):
 def deleteEntradas(request, id):
     entrada=Entrada.objects.get(id=id)
     entrada.delete()
-    entradas=Entrada.objects.all()
+
+    if request.user.is_superuser > 0:
+        entradas=Entrada.objects.all()
+    else:
+        entradas=Entrada.objects.filter(autor=request.user)
     
     return render(request, "deleteEntrada.html", {"entradas":entradas,"titulo":"Eliminar entradas","avatar":obtenerAvatar(request)})
 
