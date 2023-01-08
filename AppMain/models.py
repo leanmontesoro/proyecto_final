@@ -13,7 +13,7 @@ class Avatar(models.Model):
 class Entrada(models.Model):
     titulo=models.CharField(max_length=50)
     subtitulo=models.CharField(max_length=50)
-    resume=models.CharField(max_length=50,default="resumen")
+    resume=models.CharField(max_length=500,default="resumen")
     read_time=models.CharField(max_length=50,default="No especificado")
     cuerpo= RichTextUploadingField() # CKEditor Rich Text Field
     autor=models.CharField(max_length=50)

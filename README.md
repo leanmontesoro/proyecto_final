@@ -5,6 +5,7 @@
     - [**URL's relevantes para la navegacion:**](#urls-relevantes-para-la-navegacion)
     - [**Rúbricas**](#rúbricas)
     - [**Rúbricas navegacion**](#rúbricas-navegacion)
+    - [**Credenciales \& Usuarios de prueba**](#credenciales--usuarios-de-prueba)
 
 
 ***
@@ -76,3 +77,14 @@ Trabajé de manera individual en la creacion de un blog referido a la gastronom�
 * *Tener una app de mensajería en el route messages/ para que los perfiles se puedan contactar entre sí.*: En la AppMensajeria está desarrollada esta funcionalidad. Accediendo a **chat/homeMensajes**
 
 
+### **Credenciales & Usuarios de prueba**
+
+* Administrador
+  1. User: admin
+  2. Pass: admin
+
+* Usuarios
+  1. User: Usuario1
+  2. Pass: #coderhouse
+  3. User: Usuario2
+  4. Pass: #coderhouse
