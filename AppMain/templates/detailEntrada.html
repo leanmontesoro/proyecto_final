@@ -36,7 +36,10 @@
 		<div class="row">
 			<div class="col-md-5 wrapthumbnail">
 				<a href="post.html">
-					<div class="thumbnail" style="background-image:url(	'{% static 'assets/img/demopic/inicio1.jpg' %}'	);">
+					<!-- <div class="thumbnail" style="background-image:url(	'{% static 'assets/img/demopic/asado.jpg' %}'	);"> -->
+						<div class="thumbnail" style="background-image:url(	'{{ entrada.imagen.url }}'	);">
+						
+						
 					</div>
 				</a>
 			</div>
@@ -44,7 +47,7 @@
 				<div class="card-block">
 					<h2 class="card-title"><a href="{% url 'detailEntrada' entrada.id %}">{{ entrada.titulo }}</a></h2>
 					<h4 class="card-text">{{ entrada.subtitulo }}</h4>
-				
+					
 					<div class="metafooter">
 						<div class="wrapfooter">
 							<span class="meta-footer-thumb">
@@ -62,7 +65,7 @@
 
 			</div>
 		</div>
-		<p>{{ entrada.cuerpo }}</p>
+		<p>{{ entrada.cuerpo | safe }}</p>
 	</div>
 
 	

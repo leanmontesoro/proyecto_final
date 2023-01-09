@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-
+from ckeditor_uploader.fields import RichTextUploadingField 
 # Create your models here.
 
 class Avatar(models.Model):
@@ -13,18 +13,13 @@ class Avatar(models.Model):
 class Entrada(models.Model):
     titulo=models.CharField(max_length=50)
     subtitulo=models.CharField(max_length=50)
-    resume=models.CharField(max_length=50,default="resumen")
+    resume=models.CharField(max_length=500,default="resumen")
     read_time=models.CharField(max_length=50,default="No especificado")
-    cuerpo=models.CharField(max_length=5000)
+    cuerpo= RichTextUploadingField() # CKEditor Rich Text Field
     autor=models.CharField(max_length=50)
     fecha=models.DateField()
-    imagen=models.ImageField(upload_to='avatares')
+    imagen=models.ImageField(upload_to='media', blank=True)
     
     def __str__(self):
         return self.titulo+" "+self.subtitulo
 
-class Mensaje(models.Model):
-    emisor=models.CharField(max_length=50)
-    receptor=models.CharField(max_length=50)
-    cuerpo=models.CharField(max_length=5000)
-    leido=models.BooleanField()

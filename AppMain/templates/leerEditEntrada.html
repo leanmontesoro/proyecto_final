@@ -21,12 +21,7 @@
 
 {% endblock %}
 
-{% block mensaje %}
-	<div class="section-title">
-		<h2><span>{{ mensaje }}</span></h2>
-	</div> 
 
-{% endblock %}
 
 {% if entradas %}
 
@@ -37,7 +32,7 @@
 		<!-- <form action="{% url 'editEntrada' entrada.id %}" method="POST"> {% csrf_token %} -->
         <li>Titulo: {{entrada.titulo}}</li>
 		<li>Subtitulo: {{entrada.subtitulo}}</li>
-		<li>Cuerpo: {{entrada.cuerpo}}</li>
+		<li>Cuerpo: {{ entrada.cuerpo | safe }}</li>
 		<li>Autor: {{entrada.autor}}</li>
 		<li>Fecha: {{entrada.fecha}}</li> 
 		<li>Resume: {{entrada.resume}}</li>
@@ -49,6 +44,10 @@
 	</ul>
 	{% endblock %}
 {% else %}
+	{% block mensaje %}		
+	<div class="section-title">
+		<h2><span>Su usuario no posee entradas para editar</span></h2>
+	</div>
+	{% endblock %}
 
-	<p> NO HAY ENTRADAS </p>
 {% endif %}

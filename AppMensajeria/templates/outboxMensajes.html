@@ -1,0 +1,81 @@
+{% extends "padre.html" %}
+
+{% load static %}
+<!-- End Nav
+================================================== -->
+
+<!-- Begin Site Title
+================================================== -->
+{% block descripcion %}
+<div class="container">
+	<div class="mainheading">
+		<!-- TODO: bloque variable -->
+		<h1 class="sitetitle">Outbox</h1>
+		<p class="lead">
+			 
+		</p>
+	</div>
+	{% endblock %}
+		<!-- TODO: bloque variable -->
+<!-- End Site Title
+================================================== -->
+
+	<!-- Begin Featured
+	================================================== -->
+	{% block mensaje %}
+	<section class="featured-posts">
+	<div class="section-title">
+		<h2><span> </span></h2>
+	</div>
+	{% endblock %}
+	{% block mensajeria %}
+	
+	<div class="container px-4 px-lg-5">
+		<div class="row gx-4 gx-lg-5 justify-content-center">
+			<div class="col-md-10 col-lg-8 col-xl-7">
+				<hr class="my-4" /> 
+				<div class="post-preview"> 
+					<table >
+						<tr>
+							<th style="border: 1px solid #000; width: 25%; padding: 0.3em;">Para:       </th>
+							<th style="border: 1px solid #000; width: 25%; padding: 0.3em;">Mensajes:   </th>
+							<th style="border: 1px solid #000; width: 25%; padding: 0.3em;">Hora:        </th>
+							<th style="border: 1px solid #000; width: 25%; padding: 0.3em;">Leído:       </th>
+						</tr>
+						{% for m in mensajes %}
+						<tr>
+							<td style="text-align: center; border: 1px solid #000; width: 25%; border-spacing: 0; padding: 0.3em;">{{ m.recibir }}</td>
+							<td style="text-align: center; border: 1px solid #000; width: 25%; border-spacing: 0; padding: 0.3em;">{{ m.mensaje }}</td>
+							<td style="text-align: center; border: 1px solid #000; width: 25%; border-spacing: 0; padding: 0.3em;">{{ m.hora }}</td>
+							<td style="text-align: center; border: 1px solid #000; width: 25%; border-spacing: 0; padding: 0.3em;">{{ m.leido }}</td>
+						</tr>   
+						{% endfor %}
+					</table>
+					<br>
+				</div>
+			</div>
+		</div>
+	</div>   
+
+	{% endblock %}	
+	<!-- Begin Footer
+	================================================== -->
+
+	<!-- End Footer
+	================================================== -->
+
+</div>
+<!-- /.container -->
+
+<!-- Bootstrap core JavaScript
+    ================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<!-- <script src="static/assets/js/jquery.min.js"></script> -->
+<script src="{% static 'assets/js/jquery.min.js' %}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+<!-- <script src="static/assets/js/bootstrap.min.js"></script> -->
+<script src="{% static 'assets/js/bootstrap.min.js' %}"></script>
+<!-- <script src="static/assets/js/ie10-viewport-bug-workaround.js"></script> -->
+<script src="{% static 'assets/js/ie10-viewport-bug-workaround.js' %}"></script>
+</body>
+</html>
