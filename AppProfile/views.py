@@ -25,13 +25,13 @@ def obtenerAvatar(request):
 def editarPerfil(request):
     datos_actuales = Perfil.objects.filter(user = request.user)
     entradas=Entrada.objects.all()
-    print("Entre")
+   
     if datos_actuales:
-        print("Entre_datos actuales true")
+       
         formulario_edit = Perfil_Form(initial={"descripcion": datos_actuales[0].descripcion, "web": datos_actuales[0].web, "avatar": datos_actuales[0].avatar})
     else:
         formulario_edit = Perfil_Form()
-        print("Entre_datos actuales false")
+        
     
     if request.method == "POST":
         formulario = Perfil_Form(request.POST, request.FILES)

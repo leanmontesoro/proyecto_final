@@ -5,16 +5,6 @@ from AppsignUp.forms import RegistroUsuarioForm
 from AppMain.models import Avatar,Entrada
 from AppProfile.views import obtenerAvatar
 
-# def obtenerAvatar(request):
-#     lista=Avatar.objects.filter(user=request.user)
-#     if len(lista)!=0:
-#         imagen=lista[0].imagen.url
-#     else:
-#         imagen="/media/avatarpordefecto3.png"
-#     return imagen
-
-# def inicio(request):
-#     return render(request, "padre.html")
 
 def register(request):
     if request.method=="POST":
