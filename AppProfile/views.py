@@ -24,6 +24,7 @@ def obtenerAvatar(request):
 
 def editarPerfil(request):
     datos_actuales = Perfil.objects.filter(user = request.user)
+    entradas=Entrada.objects.all()
     print("Entre")
     if datos_actuales:
         print("Entre_datos actuales true")
@@ -44,16 +45,17 @@ def editarPerfil(request):
                 datos_actuales.delete()
                 datos_nuevos = Perfil(user=request.user, descripcion = request.POST["descripcion"], web = request.POST["web"], avatar = request.FILES["avatar"] )
                 datos_nuevos.save()
-                return render(request, "index.html", {"mensaje": "Perfil editado exitosamente!", "avatar": obtenerAvatar(request)})
+                return render(request, "index.html", {"mensaje": "Perfil editado exitosamente!","entradas":entradas, "avatar": obtenerAvatar(request)})
         else:
             return render(request, "editProfile.html", {"form" : formulario_edit, "mensaje": "Error al editar el perfil", "avatar": obtenerAvatar(request)})
     else:
-        print("soyget")
+        
         return render(request, "editProfile.html", {"form": formulario_edit, "mensaje":"Editar perfil","nombreusuario":request.user, "avatar": obtenerAvatar(request)}) 
 
 
 
 def editarUsuario(request):
+    entradas=Entrada.objects.all()
     if request.method == "POST":
         edit_form = UserEditForm(request.POST)
         user_actual = User.objects.get(username = request.user)
@@ -66,7 +68,7 @@ def editarUsuario(request):
             user_actual.last_name=informacion["last_name"]
             user_actual.save()
 
-            return render(request, "index.html", {"mensaje": f"El usuario {request.user} ha sido editado exitosamente!", "avatar": obtenerAvatar(request)})
+            return render(request, "index.html", {"mensaje": f"El usuario {request.user} ha sido editado exitosamente!","entradas":entradas, "avatar": obtenerAvatar(request)})
 
         else:
             

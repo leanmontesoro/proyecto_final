@@ -22,7 +22,7 @@ from django.conf import settings
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("", include("AppMain.urls")),
-    path("chat/", include("AppMensajeria.urls")),
+    path("chat/", include("AppMensajeria.urls"),name="mensajeria"),
     re_path(r'^ckeditor/', include('ckeditor_uploader.urls')), # The CKEditor path
 ]
 

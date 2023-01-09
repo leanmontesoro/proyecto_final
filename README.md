@@ -90,3 +90,5 @@ Trabaj√© de manera individual en la creacion de un blog referido a la gastronom√
   2. Pass: #coderhouse
   3. User: Usuario2
   4. Pass: #coderhouse
+  5. User: Usuario7
+  6. Pass: #coderhouse1
